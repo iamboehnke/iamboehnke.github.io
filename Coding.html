@@ -10,6 +10,12 @@
     <header class="header" id="header">
         <nav class="nav container">
             <a href="/?" class="nav__logo">My Portfolio</a>
+            <!-- Hamburger Icon for Mobile -->
+            <div class="nav__hamburger" onclick="toggleMenu()">
+                <span class="nav__bar"></span>
+                <span class="nav__bar"></span>
+                <span class="nav__bar"></span>
+            </div>
             <ul class="nav__list">
                 <li class="nav__item"><a href="/?" class="nav__link">Home</a></li>
                 <li class="nav__item"><a href="/About" class="nav__link">About</a></li>
@@ -86,5 +92,7 @@ model.compile(optimizer='adam', loss='mean_squared_error')</code></pre>
     <footer class="footer">
         <p>&copy; 2024 Bohnkedigital.com | All rights reserved.</p>
     </footer>
+    <!--==================== JS ====================-->
+    <script src="script.js"></script>
 </body>
 </html>
