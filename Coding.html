@@ -9,7 +9,6 @@
 <body>
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="/?" class="nav__logo">My Portfolio</a>
             <!-- Hamburger Icon for Mobile -->
             <div class="nav__hamburger" onclick="toggleMenu()">
                 <span class="nav__bar"></span>
@@ -21,8 +20,8 @@
                 <li class="nav__item"><a href="/About" class="nav__link">About</a></li>
                 <li class="nav__item"><a href="" class="nav__link">Coding</a></li>
                 <li class="nav__item"><a href="/Raspberry" class="nav__link">Raspberry projects</a></li>
-                <li class="nav__item"><a href="/photos" class="nav__link active">Photos</a></li>
-                <li class="nav__item"><a href="/contact" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="/Photos" class="nav__link active">Photos</a></li>
+                <li class="nav__item"><a href="/Contact" class="nav__link">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -61,12 +60,12 @@
             <div class="container">
                 <h3>Step 3: Model Building</h3>
                 <p>I built a neural network with TensorFlow that combines news sentiment with stock prices:</p>
-                <pre><code>import tensorflow as tf
-                model = tf.keras.Sequential([
-                    tf.keras.layers.Dense(128, activation='relu', input_dim=news_data.shape[1]),
-                    tf.keras.layers.LSTM(64),
-                    tf.keras.layers.Dense(1)
-                ])
+                <pre><code>
+                import tensorflow as tf
+                model = tf.keras.Sequential([tf.keras.layers.Dense(128, activation='relu',
+                input_dim=news_data.shape[1]),
+                tf.keras.layers.LSTM(64),
+                tf.keras.layers.Dense(1)])
                 model.compile(optimizer='adam', loss='mean_squared_error')</code></pre>
             </div>
 
@@ -84,9 +83,8 @@
                 <img src="stock-price-prediction.png" alt="Stock Price Prediction vs Actual Prices">
 
                 <p>The chart shows how the model's predictions align with actual stock price trends, demonstrating the accuracy of the machine learning approach.</p>
+                <p>For full details and code, check out my <a href="https://github.com/your-portfolio-repo" target="_blank">GitHub repository</a>.</p>
             </div>
-
-            <p>For full details and code, check out my <a href="https://github.com/your-portfolio-repo" target="_blank">GitHub repository</a>.</p>
         </section>
     </main>
 
@@ -111,6 +109,6 @@
         </div>
     </footer>
     <!--==================== JS ====================-->
-    <script src="script.js"></script>
+    <script src="/assets/js/javaScript.js"></script>
 </body>
 </html>
