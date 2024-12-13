@@ -246,34 +246,91 @@ img {
 
 /*==================== NAV ====================*/
 .nav {
-  display: flex;               
-  justify-content: center;      
-  align-items: center;          
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: var(--header-height);
   background-color: var(--container-color);
   padding: 0 var(--mb-1-5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Default styling for the navigation links */
 .nav__list {
   display: flex;
-  justify-content: space-around;  
-  flex-wrap: wrap;  
+  justify-content: space-around;
+  align-items: center;
   padding: 0;
+  margin: 0;
+  transition: all 0.3s ease; /
 }
 
+/* Individual link styling */
 .nav__link {
-  padding: var(--mb-0-5) var(--mb-1);
-  font-size: var(--small-font-size);
-  margin: 0 10px;  
+  padding: 12px 20px;
+  font-size: 1rem;
+  margin: 0 15px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav__item {
-  list-style-type: none;       
-}
-
+/* Hover effect for links */
 .nav__link:hover {
-  color: var(--first-color);
+  background-color: var(--first-color);
+  color: white;
+}
+
+/* Hide the hamburger by default */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Hamburger bars */
+.nav__bar {
+  width: 25px;
+  height: 3px;
+  margin: 4px 0;
+  background-color: var(--text-color);
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  .nav__list {
+    display: none;  
+    flex-direction: column;
+    align-items: center;
+    width: 100%;  
+    background-color: var(--container-color);  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;  
+    position: absolute;  
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 20px; 
+  }
+
+  .nav__hamburger {
+    display: flex;  
+  }
+}
+
+.nav__list.active {
+  display: flex;  
+}
+
+.nav__list.active .nav__link {
+  background-color: var(--first-color);  
+  color: white;  
+}
+
+.nav__list.active .nav__link:hover {
+  background-color: darken(var(--first-color), 10%);  
 }
 
 /*==================== BUTTONS ====================*/
@@ -337,7 +394,6 @@ img {
 .about__img-container {
     position: relative;
     z-index: 2; 
-    max-width: 300px;
     width: 100%;
     overflow: hidden;
     border-radius: 50%; 
@@ -347,7 +403,8 @@ img {
     width: 100%;
     height: auto;
     object-fit: cover; 
-    clip-path: ellipse(39% 48% at 45% 40%); 
+    clip-path: ellipse(37% 50% at 50% 50%);
+    margin: '5px'; 
 }
 
 
@@ -486,43 +543,3 @@ img {
       font-size: 2rem;
   }
 }
-
-/* Hide the hamburger icon by default */
-/* Hide the hamburger by default */
-.nav__hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  z-index: 1000;  /* Make sure it's above other elements */
-}
-
-.nav__bar {
-  width: 25px;
-  height: 3px;
-  margin: 4px 0;
-  background-color: var(--text-color);
-}
-
-/* Ensure it shows only on smaller screens */
-@media screen and (max-width: 768px) {
-  .nav__list {
-      display: none;  /* Hidden by default */
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .nav__hamburger {
-      display: flex;  /* Show hamburger on small screens */
-  }
-}
-
-.nav__list.active {
-  display: flex;  /* Show the menu when active */
-}
-
-.nav__link {
-  padding: 10px;
-  font-size: var(--normal-font-size);
-  margin: 10px 0;
-}
-

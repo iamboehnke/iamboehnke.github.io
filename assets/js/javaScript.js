@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (hamburger && navList) {
         hamburger.addEventListener('click', function () {
-            console.log("Hamburger clicked!");  // This should show in the console when clicked
-            navList.classList.toggle('active');
+            console.log("Hamburger clicked!");
+            navList.classList.toggle('active');  
         });
     } else {
         console.log("Could not find elements");
