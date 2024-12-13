@@ -1,45 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/Style.css">
-    <link rel="icon" href="static/Photos/ShapingNewShampooLogobyDesigner.png" type="image">
-    <meta name="theme-color" content="#1A1A1D">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/static/my-script.js"></script>
-    <title>Bohnkedigital</title>
+
+    <!--==================== GOOGLE FONTS ====================-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="styles.css">
+
+    <title>About Me | My Portfolio</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="/?">
-                <img id="homepagebutton" src="static/Photos/ShapingNewShampooLogobyDesigner.png" alt="Home Button">
-            </a>
-        </div>
-        <nav class="topnav" id="myTopnav">
-            <a href="/?">Home</a>
-            <a href="/Photos">Photos</a>
-            <a href="/Coding">Coding</a>
-            <a href="/Raspberry">Raspberry Pi projects</a>
-            <a href="/About">About</a>
-            </a>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">My Portfolio</a>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="about.html" class="nav__link active">About</a></li>
+                <li class="nav__item"><a href="index.html#skills" class="nav__link">Skills</a></li>
+                <li class="nav__item"><a href="index.html#portfolio" class="nav__link">Portfolio</a></li>
+                <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    
-    <div class="section">
-        <div class="article">
-            <h2>ABOUT SHAPING NEW SHAMPOO</h2>
-            <p>The story of SHAPING NEW TOMORROW began in 2024 with a vision for better hair care. Finding a balance between effective cleansing and nourishing ingredients was a challenge, sparking the creation of an innovative international shampoo brand.</p>
-            <p>Our concept revolves around being ready for whatever the day throws at you, much like having the perfect hair day, no matter the occasion. Whether you're tackling new challenges, making crucial decisions, stepping out of your comfort zone, or simply lounging at home, our shampoo promises to elevate your hair care experience.</p>
-            <p>We've dared to challenge conventional norms and redefined what premium hair care should entail. Our products are a result of continuous refinement, ensuring that you feel the difference from the moment you lather up. Experience a new dimension of hair care comfort with SHAPING NEW TOMORROW.</p>
-        </div>
-        <div class="article">
-            <img src="/static/Photos/paul-siewert-dnpa8k6TGRE-unsplash.jpg" alt="Hair">
-        </div>
-    </div>
-    
-    <footer>
-        © 2024 SNS ApS. All rights reserved
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== ABOUT ME ====================-->
+        <section class="about section" id="about">
+            <div class="container about__container">
+                <h2 class="section__title">About Me</h2>
+                <p class="about__subtitle">Who I Am</p>
+                <div class="about__content grid">
+                    <!-- Profile Photo -->
+                    <div class="about__img">
+                        <img src="profile.jpg" alt="Your Photo">
+                    </div>
+
+                    <!-- About Text -->
+                    <div class="about__data">
+                        <p>
+                            Hello! I'm <strong>[Your Name]</strong>, a passionate developer and designer. 
+                            I thrive on building creative, functional, and innovative solutions. 
+                            With a solid foundation in <strong>web development</strong> and <strong>data science</strong>, 
+                            I bring technical expertise and a creative spark to every project I work on.
+                        </p>
+                        <p>
+                            When I’m not coding, you can find me exploring photography, tinkering with Raspberry Pi projects, or geeking out over the latest tech trends.
+                        </p>
+                        <a href="index.html#portfolio" class="button">See My Work</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== EDUCATION ====================-->
+        <section class="education section">
+            <div class="container">
+                <h2 class="section__title">Education</h2>
+                <div class="grid education__grid">
+                    <div class="education__item">
+                        <h3>Bachelor’s Degree in Computer Science</h3>
+                        <p>University Name, Year Graduated</p>
+                    </div>
+                    <div class="education__item">
+                        <h3>Certifications</h3>
+                        <p>Relevant courses like Data Science, Web Development, etc.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== EXPERIENCE ====================-->
+        <section class="experience section">
+            <div class="container">
+                <h2 class="section__title">Experience</h2>
+                <div class="grid experience__grid">
+                    <div class="experience__item">
+                        <h3>Software Developer</h3>
+                        <p>Company Name, Year–Year</p>
+                        <p>Highlights of responsibilities or achievements.</p>
+                    </div>
+                    <div class="experience__item">
+                        <h3>Freelance Projects</h3>
+                        <p>Details about significant freelance work or independent projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== INTERESTS ====================-->
+        <section class="interests section">
+            <div class="container">
+                <h2 class="section__title">Hobbies & Interests</h2>
+                <div class="grid interests__grid">
+                    <div class="interests__item">
+                        <h3>Photography</h3>
+                        <p>I capture the world through my lens, focusing on landscapes and urban scenes.</p>
+                    </div>
+                    <div class="interests__item">
+                        <h3>Tech & Gadgets</h3>
+                        <p>Exploring innovative tech tools and building Raspberry Pi projects.</p>
+                    </div>
+                    <div class="interests__item">
+                        <h3>Travel</h3>
+                        <p>I enjoy discovering new cultures and inspirations for my work.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
     </footer>
 </body>
 </html>

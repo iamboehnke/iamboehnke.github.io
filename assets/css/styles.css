@@ -6,7 +6,6 @@
     --header-height: 3rem;
 
     /*========== Colors ==========*/
-    /* Change favorite color */
     --hue-color: 250; /*Purple 250 - Green 142 - Blue 230 - Pink 340*/
 
     /* HSL color mode */
@@ -40,7 +39,6 @@
     --font-semi-bold: 600;
 
     /*========== Margenes Bottom ==========*/
-    /* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
     --mb-0-25: .25rem;
     --mb-0-5: .5rem;
     --mb-0-75: .75rem;
@@ -70,10 +68,15 @@
 }
 
 /*========== Variables Dark theme ==========*/
-
-
-/*========== Button Dark/Light ==========*/
-
+[data-theme="dark"] {
+    --body-color: hsl(240, 12%, 16%);
+    --container-color: hsl(240, 12%, 22%);
+    --title-color: hsl(240, 8%, 90%);
+    --text-color: hsl(240, 8%, 75%);
+    --input-color: hsl(240, 12%, 20%);
+    --scroll-bar-color: hsl(240, 12%, 30%);
+    --scroll-thumb-color: hsl(240, 12%, 40%);
+}
 
 /*==================== BASE ====================*/
 * {
@@ -136,8 +139,8 @@ img {
 /*==================== LAYOUT ====================*/
 .container {
   max-width: 768px;
-  margin-left: var(--mb-1-5);
-  margin-right: var(--mb-1-5);
+  margin: 0 auto;
+  padding: 0 var(--mb-1-5);
 }
 
 .grid {
@@ -145,77 +148,132 @@ img {
   gap: 1.5rem;
 }
 
-.header {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: var(--z-fixed);
-  background-color: var(--body-color);
+/*==================== NAV ====================*/
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  background-color: var(--container-color);
+  padding: 0 var(--mb-1-5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/*==================== NAV ====================*/
+.nav__link {
+  font-size: var(--small-font-size);
+  color: var(--text-color);
+  padding: var(--mb-0-5) var(--mb-1);
+  transition: color 0.3s;
+}
 
-
-/* show menu */
-
-
-/* Active link */
-
-
-/* Change background header */
-
-
-/*==================== HOME ====================*/
-
+.nav__link:hover {
+  color: var(--first-color);
+}
 
 /*==================== BUTTONS ====================*/
+.button {
+  display: inline-block;
+  background-color: var(--first-color);
+  color: var(--container-color);
+  padding: var(--mb-0-75) var(--mb-1-5);
+  border-radius: 5px;
+  font-size: var(--small-font-size);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
 
+.button:hover {
+  background-color: var(--first-color-alt);
+}
 
-/*==================== ABOUT ====================*/
+/*==================== SCROLL BAR ====================*/
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: var(--scroll-bar-color);
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 10px;
+}
 
-/*==================== SKILLS ====================*/
+/*==================== Photos Section ====================*/
+.photos__subtitle {
+  text-align: center;
+  margin-bottom: var(--mb-2);
+  font-size: var(--normal-font-size);
+  color: var(--text-color-light);
+}
 
+.photos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
 
-/*==================== QUALIFICATION ====================*/
+.photos__img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
 
+.photos__img:hover {
+  transform: scale(1.05);
+}
 
-/*==================== SERVICES ====================*/
+/*==================== Project Cards ====================*/
+.project__card {
+  background-color: var(--container-color);
+  padding: var(--mb-1);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
 
+.project__card:hover {
+  transform: translateY(-5px);
+}
 
-/* Active Modal */
+.project__img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: var(--mb-0-5);
+}
 
+.project__title {
+  font-size: var(--h3-font-size);
+  margin-bottom: var(--mb-0-25);
+  color: var(--title-color);
+}
 
-/*==================== PORTFOLIO ====================*/
+.project__description {
+  font-size: var(--normal-font-size);
+  color: var(--text-color-light);
+}
 
+/* Inspirational Photos Grid */
+#gallery .photos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--mb-1);
+}
 
-/*==================== PROJECT IN MIND ====================*/
+#gallery .photos__img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
 
-
-/*==================== TESTIMONIAL ====================*/
-
-
-/*==================== CONTACT ME ====================*/
-
-
-/*==================== FOOTER ====================*/
-
-
-/*========== SCROLL UP ==========*/
-
-
-/* Show scroll */
-
-
-/*========== SCROLL BAR ==========*/
-
+#gallery .photos__img:hover {
+  transform: scale(1.05);
+}
 
 /*==================== MEDIA QUERIES ====================*/
-/* For small devices */
-
-
-/* For medium devices */
-
-
-/* For large devices */
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 0 var(--mb-0-75);
+  }
+}

@@ -1,45 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/Style.css">
-    <link rel="icon" href="static/Photos/ShapingNewShampooLogobyDesigner.png" type="image">
-    <meta name="theme-color" content="#1A1A1D">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/static/my-script.js"></script>
-    <title>Bohnkedigital</title>
+
+    <!--==================== GOOGLE FONTS ====================-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="styles.css">
+
+    <!--==================== LIGHTBOX CSS (Optional) ====================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+
+    <title>Photos | My Portfolio</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="/?">
-                <img id="homepagebutton" src="static/Photos/ShapingNewShampooLogobyDesigner.png" alt="Home Button">
-            </a>
-        </div>
-        <nav class="topnav" id="myTopnav">
-            <a href="/?">Home</a>
-            <a href="/Photos">Photos</a>
-            <a href="/Coding">Coding</a>
-            <a href="/Raspberry">Raspberry Pi projects</a>
-            <a href="/About">About</a>
-            </a>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">My Portfolio</a>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="index.html#portfolio" class="nav__link">Portfolio</a></li>
+                <li class="nav__item"><a href="photos.html" class="nav__link active">Photos</a></li>
+                <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    
-    <div class="section">
-        <div class="article">
-            <h2>ABOUT SHAPING NEW SHAMPOO</h2>
-            <p>The story of SHAPING NEW TOMORROW began in 2024 with a vision for better hair care. Finding a balance between effective cleansing and nourishing ingredients was a challenge, sparking the creation of an innovative international shampoo brand.</p>
-            <p>Our concept revolves around being ready for whatever the day throws at you, much like having the perfect hair day, no matter the occasion. Whether you're tackling new challenges, making crucial decisions, stepping out of your comfort zone, or simply lounging at home, our shampoo promises to elevate your hair care experience.</p>
-            <p>We've dared to challenge conventional norms and redefined what premium hair care should entail. Our products are a result of continuous refinement, ensuring that you feel the difference from the moment you lather up. Experience a new dimension of hair care comfort with SHAPING NEW TOMORROW.</p>
-        </div>
-        <div class="article">
-            <img src="/static/Photos/paul-siewert-dnpa8k6TGRE-unsplash.jpg" alt="Hair">
-        </div>
-    </div>
-    
-    <footer>
-        © 2024 SNS ApS. All rights reserved
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <section class="photos section" id="photos">
+            <div class="container">
+                <h2 class="section__title">Photography</h2>
+                <p class="photos__subtitle">A collection of my favorite shots</p>
+
+                <!-- Image Grid -->
+                <div class="photos__grid">
+                    <a href="images/photo1-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 1">
+                        <img src="images/photo1-thumb.jpg" alt="Photo 1" class="photos__img">
+                    </a>
+                    <a href="images/photo2-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 2">
+                        <img src="images/photo2-thumb.jpg" alt="Photo 2" class="photos__img">
+                    </a>
+                    <a href="images/photo3-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 3">
+                        <img src="images/photo3-thumb.jpg" alt="Photo 3" class="photos__img">
+                    </a>
+                    <a href="images/photo4-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 4">
+                        <img src="images/photo4-thumb.jpg" alt="Photo 4" class="photos__img">
+                    </a>
+                    <a href="images/photo5-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 5">
+                        <img src="images/photo5-thumb.jpg" alt="Photo 5" class="photos__img">
+                    </a>
+                    <a href="images/photo6-large.jpg" data-lightbox="gallery" data-title="Caption for Photo 6">
+                        <img src="images/photo6-thumb.jpg" alt="Photo 6" class="photos__img">
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
     </footer>
+
+    <!--==================== LIGHTBOX JS (Optional) ====================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
 </html>

@@ -1,45 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/Style.css">
-    <link rel="icon" href="static/Photos/ShapingNewShampooLogobyDesigner.png" type="image">
-    <meta name="theme-color" content="#1A1A1D">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/static/my-script.js"></script>
-    <title>Bohnkedigital</title>
+
+    <!--==================== GOOGLE FONTS ====================-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Raspberry Pi Projects | My Portfolio</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="/?">
-                <img id="homepagebutton" src="static/Photos/ShapingNewShampooLogobyDesigner.png" alt="Home Button">
-            </a>
-        </div>
-        <nav class="topnav" id="myTopnav">
-            <a href="/?">Home</a>
-            <a href="/Photos">Photos</a>
-            <a href="/Coding">Coding</a>
-            <a href="/Raspberry">Raspberry Pi projects</a>
-            <a href="/About">About</a>
-            </a>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">My Portfolio</a>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="photos.html" class="nav__link">Photos</a></li>
+                <li class="nav__item"><a href="raspberry.html" class="nav__link active">Raspberry Pi</a></li>
+                <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    
-    <div class="section">
-        <div class="article">
-            <h2>ABOUT SHAPING NEW SHAMPOO</h2>
-            <p>The story of SHAPING NEW TOMORROW began in 2024 with a vision for better hair care. Finding a balance between effective cleansing and nourishing ingredients was a challenge, sparking the creation of an innovative international shampoo brand.</p>
-            <p>Our concept revolves around being ready for whatever the day throws at you, much like having the perfect hair day, no matter the occasion. Whether you're tackling new challenges, making crucial decisions, stepping out of your comfort zone, or simply lounging at home, our shampoo promises to elevate your hair care experience.</p>
-            <p>We've dared to challenge conventional norms and redefined what premium hair care should entail. Our products are a result of continuous refinement, ensuring that you feel the difference from the moment you lather up. Experience a new dimension of hair care comfort with SHAPING NEW TOMORROW.</p>
-        </div>
-        <div class="article">
-            <img src="/static/Photos/paul-siewert-dnpa8k6TGRE-unsplash.jpg" alt="Hair">
-        </div>
-    </div>
-    
-    <footer>
-        © 2024 SNS ApS. All rights reserved
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!-- Introduction -->
+        <section class="section" id="intro">
+            <div class="container">
+                <h2 class="section__title">Raspberry Pi Projects</h2>
+                <p class="section__subtitle">
+                    I'm exploring the amazing world of Raspberry Pi! This page will feature my upcoming projects, including IoT gadgets, media servers, and fun experiments with coding and hardware.
+                </p>
+            </div>
+        </section>
+
+        <!-- Placeholder Projects -->
+        <section class="section" id="projects">
+            <div class="container">
+                <h3 class="section__title">Upcoming Projects</h3>
+                <div class="grid">
+                    <!-- Placeholder 1 -->
+                    <div class="project__card">
+                        <img src="images/placeholder1.jpg" alt="Placeholder Image 1" class="project__img">
+                        <h4 class="project__title">Smart Home Automation</h4>
+                        <p class="project__description">Control your home appliances with a Raspberry Pi. Coming Soon!</p>
+                    </div>
+
+                    <!-- Placeholder 2 -->
+                    <div class="project__card">
+                        <img src="images/placeholder2.jpg" alt="Placeholder Image 2" class="project__img">
+                        <h4 class="project__title">Weather Station</h4>
+                        <p class="project__description">Monitor weather conditions in real-time using sensors. Coming Soon!</p>
+                    </div>
+
+                    <!-- Placeholder 3 -->
+                    <div class="project__card">
+                        <img src="images/placeholder3.jpg" alt="Placeholder Image 3" class="project__img">
+                        <h4 class="project__title">Pi-Powered Media Center</h4>
+                        <p class="project__description">Build your own media server for streaming. Coming Soon!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inspirational Photos -->
+        <section class="section" id="gallery">
+            <div class="container">
+                <h3 class="section__title">Inspirational Ideas</h3>
+                <div class="photos__grid">
+                    <img src="images/pi-setup1.jpg" alt="Raspberry Pi Workspace 1" class="photos__img">
+                    <img src="images/pi-setup2.jpg" alt="Raspberry Pi Workspace 2" class="photos__img">
+                    <img src="images/pi-setup3.jpg" alt="Raspberry Pi Workspace 3" class="photos__img">
+                    <img src="images/pi-setup4.jpg" alt="Raspberry Pi Workspace 4" class="photos__img">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
