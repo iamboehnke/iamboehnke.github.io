@@ -1,45 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/Style.css">
-    <link rel="icon" href="static/Photos/ShapingNewShampooLogobyDesigner.png" type="image">
-    <meta name="theme-color" content="#1A1A1D">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/static/my-script.js"></script>
-    <title>Bohnkedigital</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Coding - Machine Learning Project</title>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="/?">
-                <img id="homepagebutton" src="static/Photos/ShapingNewShampooLogobyDesigner.png" alt="Home Button">
-            </a>
-        </div>
-        <nav class="topnav" id="myTopnav">
-            <a href="/?">Home</a>
-            <a href="/Photos">Photos</a>
-            <a href="/Coding">Coding</a>
-            <a href="/Raspberry">Raspberry Pi projects</a>
-            <a href="/About">About</a>
-            </a>
+    <header class="header" id="header">
+        <!-- Header Content -->
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#coding">Coding</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    
-    <div class="section">
-        <div class="article">
-            <h2>ABOUT SHAPING NEW SHAMPOO</h2>
-            <p>The story of SHAPING NEW TOMORROW began in 2024 with a vision for better hair care. Finding a balance between effective cleansing and nourishing ingredients was a challenge, sparking the creation of an innovative international shampoo brand.</p>
-            <p>Our concept revolves around being ready for whatever the day throws at you, much like having the perfect hair day, no matter the occasion. Whether you're tackling new challenges, making crucial decisions, stepping out of your comfort zone, or simply lounging at home, our shampoo promises to elevate your hair care experience.</p>
-            <p>We've dared to challenge conventional norms and redefined what premium hair care should entail. Our products are a result of continuous refinement, ensuring that you feel the difference from the moment you lather up. Experience a new dimension of hair care comfort with SHAPING NEW TOMORROW.</p>
-        </div>
-        <div class="article">
-            <img src="/static/Photos/paul-siewert-dnpa8k6TGRE-unsplash.jpg" alt="Hair">
-        </div>
-    </div>
-    
-    <footer>
-        © 2024 SNS ApS. All rights reserved
+
+    <main class="main">
+        <!--==================== CODING PROJECT ====================-->
+        <section class="coding-project section" id="coding">
+            <h2>Analyzing the Impact of News on Stock Markets</h2>
+            <p>This project uses TensorFlow and machine learning techniques to predict stock prices based on news sentiment. Below is a summary of the steps involved:</p>
+
+            <!-- Step 1: Data Collection -->
+            <div class="project-step">
+                <h3>Step 1: Data Collection</h3>
+                <p>I gathered news articles from the News API and stock data from Alpha Vantage. Here’s a sample of the data collection code:</p>
+                <pre><code>import requests
+news_api_url = "https://newsapi.org/v2/everything"
+params = {
+    "q": "stock market",
+    "apiKey": "YOUR_API_KEY"
+}
+response = requests.get(news_api_url, params=params)
+articles = response.json()["articles"]</code></pre>
+            </div>
+
+            <!-- Step 2: Data Preprocessing -->
+            <div class="project-step">
+                <h3>Step 2: Data Preprocessing</h3>
+                <p>The news articles were tokenized and vectorized, while stock prices were normalized to match the news data:</p>
+                <pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer(stop_words='english')
+news_data = vectorizer.fit_transform([article["title"] for article in articles])</code></pre>
+            </div>
+
+            <!-- Step 3: Model Building -->
+            <div class="project-step">
+                <h3>Step 3: Model Building</h3>
+                <p>I built a neural network with TensorFlow that combines news sentiment with stock prices:</p>
+                <pre><code>import tensorflow as tf
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(128, activation='relu', input_dim=news_data.shape[1]),
+    tf.keras.layers.LSTM(64),
+    tf.keras.layers.Dense(1)
+])
+model.compile(optimizer='adam', loss='mean_squared_error')</code></pre>
+            </div>
+
+            <!-- Step 4: Model Training -->
+            <div class="project-step">
+                <h3>Step 4: Model Training</h3>
+                <p>I trained the model using historical data and evaluated it using the Mean Absolute Error metric:</p>
+                <pre><code>history = model.fit(news_data, stock_prices, epochs=10, batch_size=32)</code></pre>
+            </div>
+
+            <!-- Visualization -->
+            <div class="project-step">
+                <h3>Step 5: Visualizing the Results</h3>
+                <p>Here’s a visualization of the predicted stock prices compared to the actual prices:</p>
+                <img src="stock-price-prediction.png" alt="Stock Price Prediction vs Actual Prices">
+
+                <p>The chart shows how the model's predictions align with actual stock price trends, demonstrating the accuracy of the machine learning approach.</p>
+            </div>
+
+            <p>For full details and code, check out my <a href="https://github.com/your-portfolio-repo" target="_blank">GitHub repository</a>.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Bohnkedigital.com | All rights reserved.</p>
     </footer>
 </body>
 </html>
