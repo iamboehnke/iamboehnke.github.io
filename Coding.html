@@ -29,55 +29,56 @@
 
     <main class="main">
         <!--==================== CODING PROJECT ====================-->
-        <section class="coding-project section" id="coding">
+        <section class="about section" id="about">
+            <div class="container about__container">
             <h2>Analyzing the Impact of News on Stock Markets</h2>
             <p>This project uses TensorFlow and machine learning techniques to predict stock prices based on news sentiment. Below is a summary of the steps involved:</p>
 
             <!-- Step 1: Data Collection -->
-            <div class="project-step">
+            <div class="container">
                 <h3>Step 1: Data Collection</h3>
                 <p>I gathered news articles from the News API and stock data from Alpha Vantage. Here’s a sample of the data collection code:</p>
                 <pre><code>import requests
-news_api_url = "https://newsapi.org/v2/everything"
-params = {
-    "q": "stock market",
-    "apiKey": "YOUR_API_KEY"
-}
-response = requests.get(news_api_url, params=params)
-articles = response.json()["articles"]</code></pre>
+                news_api_url = "https://newsapi.org/v2/everything"
+                params = {
+                    "q": "stock market",
+                    "apiKey": "YOUR_API_KEY"
+                }
+                response = requests.get(news_api_url, params=params)
+                articles = response.json()["articles"]</code></pre>
             </div>
 
             <!-- Step 2: Data Preprocessing -->
-            <div class="project-step">
+            <div class="container">
                 <h3>Step 2: Data Preprocessing</h3>
                 <p>The news articles were tokenized and vectorized, while stock prices were normalized to match the news data:</p>
                 <pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
-vectorizer = TfidfVectorizer(stop_words='english')
-news_data = vectorizer.fit_transform([article["title"] for article in articles])</code></pre>
+                vectorizer = TfidfVectorizer(stop_words='english')
+                news_data = vectorizer.fit_transform([article["title"] for article in articles])</code></pre>
             </div>
 
             <!-- Step 3: Model Building -->
-            <div class="project-step">
+            <div class="container">
                 <h3>Step 3: Model Building</h3>
                 <p>I built a neural network with TensorFlow that combines news sentiment with stock prices:</p>
                 <pre><code>import tensorflow as tf
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(128, activation='relu', input_dim=news_data.shape[1]),
-    tf.keras.layers.LSTM(64),
-    tf.keras.layers.Dense(1)
-])
-model.compile(optimizer='adam', loss='mean_squared_error')</code></pre>
+                model = tf.keras.Sequential([
+                    tf.keras.layers.Dense(128, activation='relu', input_dim=news_data.shape[1]),
+                    tf.keras.layers.LSTM(64),
+                    tf.keras.layers.Dense(1)
+                ])
+                model.compile(optimizer='adam', loss='mean_squared_error')</code></pre>
             </div>
 
             <!-- Step 4: Model Training -->
-            <div class="project-step">
+            <div class="container">
                 <h3>Step 4: Model Training</h3>
                 <p>I trained the model using historical data and evaluated it using the Mean Absolute Error metric:</p>
                 <pre><code>history = model.fit(news_data, stock_prices, epochs=10, batch_size=32)</code></pre>
             </div>
 
             <!-- Visualization -->
-            <div class="project-step">
+            <div class="container">
                 <h3>Step 5: Visualizing the Results</h3>
                 <p>Here’s a visualization of the predicted stock prices compared to the actual prices:</p>
                 <img src="stock-price-prediction.png" alt="Stock Price Prediction vs Actual Prices">

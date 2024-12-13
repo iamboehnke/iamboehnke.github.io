@@ -161,15 +161,15 @@ img {
 
 .nav__list {
   display: flex;
-  justify-content: space-around;  /* Ensures even spacing between links */
-  flex-wrap: wrap;  /* Allows items to wrap to the next line if needed */
+  justify-content: space-around;  
+  flex-wrap: wrap;  
   padding: 0;
 }
 
 .nav__link {
   padding: var(--mb-0-5) var(--mb-1);
   font-size: var(--small-font-size);
-  margin: 0 10px;  /* Reduced margin between links */
+  margin: 0 10px;  
 }
 
 .nav__item {
@@ -232,22 +232,36 @@ img {
   transform: scale(1.05);
 }
 
-/*==================== Blob ====================*/
-
-.blob-container {
-  position: absolute;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
-  width: 200px; 
-  height: 187px; 
-  overflow: hidden;
-  z-index: 1; 
+/*==================== Blob/About ====================*/
+.about {
+    position: relative; 
+    padding: 60px 0; 
 }
 
-.home__container {
-  position: relative; 
-  z-index: 2; 
+.blob-container {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; 
+    height: 187px; 
+    z-index: 0; 
+}
+
+.about__img-container {
+    position: relative;
+    z-index: 2; 
+    max-width: 200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 50%; 
+}
+
+.about__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the photo fits the blob shape */
+    clip-path: ellipse(50% 50% at 50% 50%); /* Optional: Make the image fit the blob shape */
 }
 
 
