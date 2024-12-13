@@ -85,8 +85,12 @@
   margin: 0;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
+  height: 100%; 
+  display: flex;
+  flex-direction: column; 
+  margin: 0;
 }
 
 body {
@@ -113,6 +117,10 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.main {
+  flex: 1; 
 }
 
 /*==================== REUSABLE CSS CLASSES ====================*/
@@ -338,8 +346,8 @@ img {
 .about__img {
     width: 100%;
     height: auto;
-    object-fit: cover; /* Ensure the photo fits the blob shape */
-    clip-path: ellipse(50% 50% at 50% 70%); /* Optional: Make the image fit the blob shape */
+    object-fit: cover; 
+    clip-path: ellipse(39% 48% at 45% 40%); 
 }
 
 
