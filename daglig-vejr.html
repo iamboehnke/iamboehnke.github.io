@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Daglig Vejr — a personal weather and pollen advisory system by Mikkel Bøhnke." />
+  <title>Daglig Vejr - Mikkel Bøhnke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <header id="site-nav">
+    <nav><ul>
+      <li id="home"><a href="../index.html">mikkel.boehnke</a></li>
+      <li><span class="nav-divider"></span></li>
+      <li><a href="../projects.html" class="active">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li class="nav-spacer"></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+    </ul></nav>
+  </header>
+
+  <main id="main-content">
+    <article class="project-article">
+
+      <div class="project-header">
+        <a href="../projects.html" class="back-link">Back to projects</a>
+
+        <h1>Daglig Vejr</h1>
+
+        <div class="project-meta">
+          <span>Started April 2025</span>
+          <span>·</span>
+          <span class="status-badge status-live">Live</span>
+        </div>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">DMI API</span>
+          <span class="tag">SMHI Pollen</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Railway</span>
+          <span class="tag">cron</span>
+          <span class="tag">smtplib</span>
+        </div>
+
+        <a href="https://github.com/" rel="noopener" class="github-link external">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="article-body">
+
+        <h2>What it does</h2>
+        <p>
+          Every morning at 06:30, Daglig Vejr pulls weather and pollen data from two Danish public APIs,
+          runs it through a small classification layer, and sends me an HTML email with three recommendations
+          for the day: whether to apply sunscreen, whether to take a hay fever pill, and whether to bring an umbrella.
+        </p>
+        <p>
+          I have a grass pollen allergy and I run outside most mornings, so getting these three things wrong
+          in the same day is genuinely unpleasant. The project exists because I wanted something that actually
+          runs and produces a tangible output I use — not a notebook sitting in a folder.
+        </p>
+
+        <h2>Data sources</h2>
+        <p>
+          Weather data comes from the <strong>DMI Open Data API</strong>, which provides free access to
+          Danish meteorological observations including UV index, precipitation probability,
+          cloud cover, and temperature. Pollen forecasts come from <strong>SMHI</strong>, the Swedish
+          meteorological institute, which publishes Scandinavian pollen levels including grass pollen concentrations.
+        </p>
+        <div class="callout">
+          <p><strong>Why SMHI for pollen?</strong> DMI does not expose a public pollen forecast API.
+          SMHI covers southern Scandinavia and the data is accurate enough for Odense. If a Danish
+          pollen API becomes available, swapping it in is a one-line change.</p>
+        </div>
+
+        <h2>Architecture</h2>
+        <p>
+          The whole system is a single Python process scheduled by Railway's cron feature.
+          No containers, no orchestration framework — just a script that runs, does its work, and exits.
+        </p>
+
+        <div class="arch-block">DMI API  ──┐
+              ├──► fetcher.py ──► classifier.py ──► mailer.py ──► Gmail
+SMHI API ──┘
+              └──► history.db (SQLite, daily log)</div>
+
+        <h3>Fetcher</h3>
+        <p>
+          <code>fetcher.py</code> calls both APIs, normalises the responses into a shared
+          schema, and returns a single data object for the day. Each API call is wrapped in
+          a retry decorator with exponential backoff — Railway free tier occasionally has cold starts,
+          and the APIs sometimes return 503 under load.
+        </p>
+
+        <h3>Classifier</h3>
+        <p>
+          <code>classifier.py</code> takes the day's data and produces three binary recommendations.
+          The current implementation is rule-based with tunable thresholds stored in a config file.
+          UV index above a threshold triggers the sunscreen recommendation; pollen count above a second
+          threshold triggers the hay fever recommendation; precipitation probability above a third triggers the umbrella.
+        </p>
+        <p>
+          I log my actual experience each day (did the recommendation turn out to be right?) into
+          <code>history.db</code>. Once enough data has accumulated, I plan to replace the rule-based
+          thresholds with a small logistic regression model trained on my own labelled data.
+          The classification interface is already abstracted behind a single function call,
+          so swapping the implementation requires no changes elsewhere.
+        </p>
+
+        <h3>Mailer</h3>
+        <p>
+          <code>mailer.py</code> renders a Jinja2 HTML template and sends it via <code>smtplib</code>
+          using a Gmail app password. The email is intentionally simple: three coloured indicators at the
+          top (green/amber/red), the raw numbers underneath, and a one-line summary. It is designed to be
+          readable in the Gmail notification preview without opening the email.
+        </p>
+
+        <h2>Deployment</h2>
+        <p>
+          The service runs on Railway's free tier as a cron job. Railway injects environment variables
+          for the API keys and email credentials, so no secrets are stored in the repository.
+          The SQLite database is mounted on a persistent volume so the history survives redeployments.
+        </p>
+
+        <div class="callout">
+          <p>Total monthly cost: <strong>zero</strong>. The DMI API is free, SMHI is free,
+          Gmail app passwords are free, and the Railway free tier covers a cron job of this size comfortably.</p>
+        </div>
+
+        <h2>What I learned</h2>
+        <p>
+          The main technical lesson was around API reliability. Both the DMI and SMHI APIs
+          return inconsistent response shapes depending on whether the station nearest your coordinates
+          has data for that parameter on that day. Writing defensive deserialization — where the
+          fetcher gracefully handles missing fields rather than crashing — turned out to be most of the
+          actual engineering work.
+        </p>
+        <p>
+          The second lesson was about production discipline. It is easy to write code that works once,
+          on your laptop, with the happy path. It is harder to write code that runs at 06:30 every morning,
+          sends you an email when something goes wrong, and recovers cleanly when an upstream API is down.
+          This project forced me to think about observability and failure modes in a way that a Jupyter notebook never does.
+        </p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="https://github.com/" rel="noopener me" title="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a></li>
+      <li><a href="https://www.linkedin.com/in/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
+    </ul>
+  </footer>
+  <script src="../theme.js"></script>
+</body>
+</html>
