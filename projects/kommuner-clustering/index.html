@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Socioeconomic clustering of all 98 Danish municipalities using K-means and hierarchical clustering on Statistics Denmark data." />
+  <title>Kommuner Clustering - Mikkel Bøhnke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    /* Styles specific to this project page */
+    .map-embed {
+      width: 100%;
+      height: 750px;
+      border: 1px solid var(--color-border, #d0d7de);
+      border-radius: 8px;
+      margin: 24px 0;
+      background: #f6f8fa;
+    }
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 16px 0 24px;
+    }
+    .feature-table th {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--color-border, #d0d7de);
+      font-weight: 600;
+    }
+    .feature-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--color-border, #d0d7de);
+      vertical-align: top;
+    }
+    .feature-table tr:last-child td { border-bottom: none; }
+    .feature-table code {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      background: var(--color-bg-subtle, #f6f8fa);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <header id="site-nav">
+    <nav><ul>
+      <li id="home"><a href="/">mikkelbohnke.com</a></li>
+      <li><span class="nav-divider"></span></li>
+      <li><a href="/projects/" class="active">Projects</a></li>
+      <li><a href="/about/">About</a></li>
+      <li class="nav-spacer"></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+    </ul></nav>
+  </header>
+
+  <main id="main-content">
+    <article class="project-article">
+      <div class="project-header">
+        <a href="/projects/" class="back-link">Back to projects</a>
+        <h1>Kommuner Clustering</h1>
+        <div class="project-meta">
+          <span>Started April 2026</span>
+          <span>·</span>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">K-means</span>
+          <span class="tag">Hierarchical clustering</span>
+          <span class="tag">Statistics Denmark API</span>
+          <span class="tag">GeoPandas</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+        <a href="https://github.com/mikkelbohnke/kommuner-clustering" rel="noopener" class="github-link external">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="article-body">
+
+        <h2>Interactive map</h2>
+        <p>Hover a municipality to see its name, cluster, and the six feature values that drove the classification. The radar chart below the map shows each cluster's socioeconomic profile relative to the others.</p>
+
+        <iframe
+          class="map-embed"
+          src="https://mikkelbohnke.github.io/kommuner-clustering/outputs/map.html"
+          title="Socioeconomic clustering of Danish municipalities"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin">
+        </iframe>
+
+        <h2>What it does</h2>
+        <p>This project applies unsupervised machine learning to official Danish register data to answer a question that is simple to ask but hard to answer by inspection: which of Denmark's 98 municipalities are structurally similar to each other, and what separates the groups?</p>
+        <p>The pipeline fetches six socioeconomic indicators for every municipality from the Statistics Denmark StatBank API, scales and clusters them using K-means (k=5, validated by silhouette analysis), and generates a self-contained interactive choropleth. The map is rebuilt quarterly by a GitHub Actions workflow as DST publishes new data.</p>
+
+        <h2>Data and features</h2>
+        <p>All data comes from the Statistics Denmark StatBank API, which provides free programmatic access to Danish official statistics under a CC 4.0 BY licence. Six features were selected to capture distinct socioeconomic dimensions without introducing collinear variables.</p>
+
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>DST table</th>
+              <th>What it captures</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Elderly share (65+)</td>
+              <td><code>FOLK1A</code></td>
+              <td>Demographic ageing pressure on municipal services</td>
+            </tr>
+            <tr>
+              <td>Youth share (0–17)</td>
+              <td><code>FOLK1A</code></td>
+              <td>Demand for schools and childcare</td>
+            </tr>
+            <tr>
+              <td>Unemployment rate</td>
+              <td><code>AUP01</code></td>
+              <td>Labour market health</td>
+            </tr>
+            <tr>
+              <td>Median disposable income</td>
+              <td><code>INDKP101</code></td>
+              <td>Household prosperity</td>
+            </tr>
+            <tr>
+              <td>Higher education share</td>
+              <td><code>HFUDD11</code></td>
+              <td>Human capital concentration</td>
+            </tr>
+            <tr>
+              <td>Social housing share</td>
+              <td><code>BOL101</code></td>
+              <td>Housing structure and affordability pressure</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Method</h2>
+        <p>Missing values — which arise when DST suppresses counts for small municipalities — are imputed using column medians before scaling. All six features are then standardised with <code>StandardScaler</code> so that no single variable dominates by magnitude. The cluster count k=5 was selected by combining the elbow method on inertia with silhouette score maximisation across k=2 through k=10.</p>
+        <p>K-means (n_init=20, random_state=42) was run alongside agglomerative hierarchical clustering with Ward linkage as an independent cross-check. The two methods' label agreement is quantified with the Adjusted Rand Index. On the real data, ARI above 0.85 means the cluster structure is genuine and not an artefact of the K-means initialisation.</p>
+
+        <h2>Deployment</h2>
+        <p>The analysis runs as a GitHub Actions workflow on a quarterly schedule. The pipeline fetches fresh data from the DST API, runs the full clustering, writes <code>outputs/map.html</code> as a self-contained Plotly HTML file, and commits it back to the repository. GitHub Pages then serves the file with no build step or server required.</p>
+        <div class="callout">
+          <p>Total cost: <strong>zero</strong>. Statistics Denmark's API is free and CC-licensed. GitHub Actions free minutes cover the quarterly run with ease. GitHub Pages serves the static output at no charge.</p>
+        </div>
+
+        <h2>What I learned</h2>
+        <p>The most interesting methodological question was feature selection. Several plausible variables — population density, net migration, tax base per capita — are correlated with the six chosen features. Including them would not have improved the clustering; it would have introduced collinearity that inflates the apparent importance of the correlated dimension. Deciding what to leave out turned out to be more consequential than what to include.</p>
+        <p>On the production side, the DST API occasionally returns suppressed values (marked as missing) for small municipalities with populations under roughly 5,000. Writing a robust imputation step before scaling was essential — a naive approach would have crashed or produced distorted clusters for islands like Samsø, Ærø, and Læsø. The defensive design is documented in the code so it is immediately visible during a code review.</p>
+        <p>The output format — a single self-contained HTML file served via GitHub Pages — reflects a deliberate choice about what "deployed" means for a portfolio project. It is live, shareable, and inspectable by anyone with a link, without requiring a server, a database, or an active process.</p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="https://github.com/iamboehnke" rel="noopener me" title="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a></li>
+      <li><a href="https://www.linkedin.com/in/mikkelbohnke/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
+    </ul>
+  </footer>
+  <script src="/theme.js"></script>
+</body>
+</html>
