@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Daglig Vejr — a personal weather and pollen advisory system by Mikkel Bøhnke." />
+  <meta name="description" content="Daglig Vejr - a personal weather and pollen advisory system by Mikkel Bøhnke." />
   <title>Daglig Vejr - Mikkel Bøhnke</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,7 +50,7 @@
       <div class="article-body">
         <h2>What it does</h2>
         <p>Every morning at 06:00, Daglig Vejr pulls weather and pollen data from two public sources, runs the numbers through a classification layer calibrated to my personal allergy profile, and sends me an HTML email with concrete recommendations for the day: what to wear, whether to apply sunscreen, whether to take a hay fever pill, and whether to bring an umbrella.</p>
-        <p>I have a class 6 grass pollen allergy (IgE 189 kUA/L — the highest measurable class) and I run outside most mornings, so getting these things wrong in combination is genuinely unpleasant. The project exists because I wanted something that actually runs, produces a tangible output I use every day, and demonstrates end-to-end production thinking rather than living in a notebook.</p>
+        <p>I have a class 6 grass pollen allergy (IgE 189 kUA/L - the highest measurable class) and I run outside most mornings, so getting these things wrong in combination is genuinely unpleasant. The project exists because I wanted something that actually runs, produces a tangible output I use every day, and demonstrates end-to-end production thinking rather than living in a notebook.</p>
 
         <h2>Data sources</h2>
         <p>Weather data comes from <strong>Open-Meteo</strong>, a free meteorological API requiring no key or registration. It provides all variables I need for Odense: UV index, precipitation probability, cloud cover, wind speed, apparent temperature, and daily forecasts. UV index is particularly important for the sunscreen recommendation and is not available on DMI's free observation tier.</p>
@@ -60,14 +60,14 @@
         </div>
 
         <h2>Personalised thresholds</h2>
-        <p>Standard pollen advisory systems recommend an antihistamine when grass pollen exceeds 30 grains/m³ — the population-level "moderate" threshold. With a class 6 IgE, that number is far too high. My specific IgE results from a hospital test informed the thresholds used by the system:</p>
+        <p>Standard pollen advisory systems recommend an antihistamine when grass pollen exceeds 30 grains/m³ - the population-level "moderate" threshold. With a class 6 IgE, that number is far too high. My specific IgE results from a hospital test informed the thresholds used by the system:</p>
         <div class="arch-block">Grass pollen  (IgE 189 kUA/L, class 6):  pill from  5 grains/m³
 Birch pollen  (IgE  55 kUA/L, class 5):  pill from 15 grains/m³
 Mugwort       (IgE   3 kUA/L, class 2):  pill from 30 grains/m³</div>
         <p>These thresholds are the starting point, not the endpoint. The feedback loop described below is designed to refine them further based on my actual day-to-day experience.</p>
 
         <h2>Architecture</h2>
-        <p>The system has three jobs, each a standalone Python script triggered by a GitHub Actions workflow. No server, no container, no persistent process — just scripts that run on schedule and exit.</p>
+        <p>The system has three jobs, each a standalone Python script triggered by a GitHub Actions workflow. No server, no container, no persistent process - just scripts that run on schedule and exit.</p>
         <div class="arch-block">Open-Meteo API  ──┐
                           ├──► weather_job.py ──► rules.py ──► email_sender.py ──► Gmail
 Astma-Allergi   ──┘              │
@@ -81,10 +81,10 @@ Astma-Allergi   ──┘              │
         <p><code>weather_job.py</code> runs at 04:00 UTC (06:00 CET) via a GitHub Actions cron schedule. It fetches both data sources, loads any trained ML model, applies the classification rules with optional model-derived threshold adjustments, sends the email, and appends the day's record to <code>data/history.json</code>. The JSON file is committed back to the repository at the end of each run, making the history visible in the commit graph.</p>
 
         <h3>Feedback loop</h3>
-        <p>Each email contains two links: "Ja, det var præcist" and "Nej, passede ikke". Clicking one opens a pre-filled GitHub Issue. A second workflow, triggered on issue creation, parses the issue title, writes the feedback into <code>history.json</code>, and closes the issue automatically. The whole interaction — from clicking a link in the email to the feedback being stored — takes under thirty seconds and requires no manual steps beyond the click.</p>
+        <p>Each email contains two links: "Ja, det var præcist" and "Nej, passede ikke". Clicking one opens a pre-filled GitHub Issue. A second workflow, triggered on issue creation, parses the issue title, writes the feedback into <code>history.json</code>, and closes the issue automatically. The whole interaction - from clicking a link in the email to the feedback being stored - takes under thirty seconds and requires no manual steps beyond the click.</p>
 
         <h3>ML layer</h3>
-        <p>A third workflow runs every Saturday. Once 20 or more labelled daily records have accumulated, it trains a Random Forest classifier on 13 features (temperature, UV index, pollen counts, season, day of week, and others) with the binary feedback label as the target. The trained model does not replace the rule-based logic; it produces threshold adjustments — lowering the pollen pill threshold when the model predicts the rules are being too conservative, for instance — that the rules engine applies on top of its defaults. Cross-validation accuracy and feature importances are saved to <code>data/model_metrics.json</code> and committed alongside the model.</p>
+        <p>A third workflow runs every Saturday. Once 20 or more labelled daily records have accumulated, it trains a Random Forest classifier on 13 features (temperature, UV index, pollen counts, season, day of week, and others) with the binary feedback label as the target. The trained model does not replace the rule-based logic; it produces threshold adjustments - lowering the pollen pill threshold when the model predicts the rules are being too conservative, for instance - that the rules engine applies on top of its defaults. Cross-validation accuracy and feature importances are saved to <code>data/model_metrics.json</code> and committed alongside the model.</p>
         <p>The separation between rules and model is a deliberate design choice. Rules produce explainable outputs from day one. The model improves personalisation over time without making the system opaque or dependent on sufficient training data to function at all.</p>
 
         <h2>Deployment</h2>
