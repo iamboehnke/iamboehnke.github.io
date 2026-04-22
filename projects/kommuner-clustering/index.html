@@ -147,7 +147,7 @@
         </table>
 
         <h2>Method</h2>
-        <p>Missing values — which arise when DST suppresses counts for small municipalities — are imputed using column medians before scaling. All six features are then standardised with <code>StandardScaler</code> so that no single variable dominates by magnitude. The cluster count k=5 was selected by combining the elbow method on inertia with silhouette score maximisation across k=2 through k=10.</p>
+        <p>Missing values - which arise when DST suppresses counts for small municipalities - are imputed using column medians before scaling. All six features are then standardised with <code>StandardScaler</code> so that no single variable dominates by magnitude. The cluster count k=5 was selected by combining the elbow method on inertia with silhouette score maximisation across k=2 through k=10.</p>
         <p>K-means (n_init=20, random_state=42) was run alongside agglomerative hierarchical clustering with Ward linkage as an independent cross-check. The two methods' label agreement is quantified with the Adjusted Rand Index. On the real data, ARI above 0.85 means the cluster structure is genuine and not an artefact of the K-means initialisation.</p>
 
         <h2>Deployment</h2>
@@ -157,9 +157,9 @@
         </div>
 
         <h2>What I learned</h2>
-        <p>The most interesting methodological question was feature selection. Several plausible variables — population density, net migration, tax base per capita — are correlated with the six chosen features. Including them would not have improved the clustering; it would have introduced collinearity that inflates the apparent importance of the correlated dimension. Deciding what to leave out turned out to be more consequential than what to include.</p>
-        <p>On the production side, the DST API occasionally returns suppressed values (marked as missing) for small municipalities with populations under roughly 5,000. Writing a robust imputation step before scaling was essential — a naive approach would have crashed or produced distorted clusters for islands like Samsø, Ærø, and Læsø. The defensive design is documented in the code so it is immediately visible during a code review.</p>
-        <p>The output format — a single self-contained HTML file served via GitHub Pages — reflects a deliberate choice about what "deployed" means for a portfolio project. It is live, shareable, and inspectable by anyone with a link, without requiring a server, a database, or an active process.</p>
+        <p>The most interesting methodological question was feature selection. Several plausible variables - population density, net migration, tax base per capita - are correlated with the six chosen features. Including them would not have improved the clustering; it would have introduced collinearity that inflates the apparent importance of the correlated dimension. Deciding what to leave out turned out to be more consequential than what to include.</p>
+        <p>On the production side, the DST API occasionally returns suppressed values (marked as missing) for small municipalities with populations under roughly 5,000. Writing a robust imputation step before scaling was essential - a naive approach would have crashed or produced distorted clusters for islands like Samsø, Ærø, and Læsø. The defensive design is documented in the code so it is immediately visible during a code review.</p>
+        <p>The output format - a single self-contained HTML file served via GitHub Pages - reflects a deliberate choice about what "deployed" means for a portfolio project. It is live, shareable, and inspectable by anyone with a link, without requiring a server, a database, or an active process.</p>
 
       </div>
     </article>
