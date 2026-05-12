@@ -118,7 +118,7 @@
       <div class="article-body">
 
         <h2>What it is</h2>
-        <p>93 applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
+        <p>92 applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
 
         <div class="stats-inline">
           <div class="stat-box"><span class="stat-n" id="stat-total">-</span><span class="stat-label">Applications</span></div>
@@ -286,13 +286,12 @@
     const second     = rows.filter(r => r.furthest_stage === 'second interview').length;
     const offer      = rows.filter(r => r.furthest_stage === 'offer').length;
     const n          = rows.length;
-    
+
     const labels = [
       `Applied - ${n}`, `Ghosted - ${ghosted}`, `Too early - ${tooEarly}`,
       `Auto-rejected - ${autoRej}`, `Personally rejected - ${persFinal + phoneNone}`,
       `Reached interview - ${reached}`, `First round - ${firstOnly}`,
       `Second round - ${second}`, `Offer - ${offer}`,
-      `Position eliminated - ${offer}`,
     ];
 
     Plotly.newPlot('chart-sankey', [{
@@ -302,21 +301,17 @@
         line: { color: 'white', width: 0.8 },
         label: labels,
         color: [C.dark, C.slate, C.slateLt, C.red, C.amber,
-                C.teal, C.tealLt, C.tealMid, C.tealDark, C.red],
-        height: 500,
-        x: [0.01, 0.99, 0.99, 0.99, 0.99, 0.60, 0.99, 0.99, 0.99, 0.99],
-        y: [0.45, 0.06, 0.22, 0.42, 0.60, 0.78, 0.70, 0.80, 0.88, 0.96],
+                C.teal, C.tealLt, C.tealMid, C.tealDark],
       },
       link: {
-        source: [0,0,0,0,0,5,5,5,8],
-        target: [1,2,3,4,5,6,7,8,9],
-        value:  [ghosted,tooEarly,autoRej,persFinal+phoneNone,reached,firstOnly,second,offer,offer],
+        source: [0,0,0,0,0,5,5,5],
+        target: [1,2,3,4,5,6,7,8],
+        value:  [ghosted,tooEarly,autoRej,persFinal+phoneNone,reached,firstOnly,second,offer],
         color: [
           'rgba(148,163,184,0.35)','rgba(203,213,225,0.35)',
           'rgba(217,107,107,0.35)','rgba(201,127,74,0.35)',
           'rgba(74,155,143,0.45)','rgba(122,188,181,0.45)',
           'rgba(58,122,111,0.45)','rgba(26,92,82,0.55)',
-          'rgba(217,107,107,0.45)',
         ],
       },
     }], baseLayout({ height: 420, margin: { l:10,r:10,t:10,b:10 } }), CFG);
