@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One year of applying — Mikkel Bøhnke</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:      #4a9b8f;
+    --teal-mid:  #3a7a6f;
+    --teal-dark: #1a5c52;
+    --slate:     #94a3b8;
+    --slate-lt:  #cbd5e1;
+    --red:       #d96b6b;
+    --amber:     #c97f4a;
+    --dark:      #1e2d3d;
+    --mid:       #4a5568;
+    --light:     #718096;
+    --bg:        #f9f7f4;
+    --card:      #ffffff;
+    --border:    #e8e5df;
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.65;
+  }
+
+  header {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 72px 24px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  header p { color: var(--light); font-size: 1.05rem; max-width: 560px; }
+
+  .stats-row {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 36px 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat {
+    text-align: center;
+    padding: 20px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .stat-n {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--teal);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  main { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+  section { margin-bottom: 64px; }
+
+  section h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  section p {
+    color: var(--mid);
+    font-size: 0.95rem;
+    max-width: 620px;
+    margin-bottom: 20px;
+  }
+
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 4px 4px;
+    overflow: hidden;
+  }
+
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 16px;
+    font-size: 0.82rem;
+    color: var(--mid);
+  }
+
+  .legend-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  .insight {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: #f0f9f8;
+    border-left: 3px solid var(--teal);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88rem;
+    color: var(--mid);
+  }
+
+  footer {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--light);
+    font-size: 0.84rem;
+  }
+
+  footer a { color: var(--teal); }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>One year of applying</h1>
+  <p>An honest data portrait of a graduate job search in Denmark — applications, sectors, timelines, and a lot of silence.</p>
+</header>
+
+<div class="stats-row">
+  <div class="stat"><span class="stat-n" id="stat-total">—</span><span class="stat-label">Applications</span></div>
+  <div class="stat"><span class="stat-n" id="stat-ghost">—</span><span class="stat-label">Ghosting rate</span></div>
+  <div class="stat"><span class="stat-n" id="stat-interview">—</span><span class="stat-label">Interviews reached</span></div>
+  <div class="stat"><span class="stat-n" id="stat-offer">—</span><span class="stat-label">Offers received</span></div>
+</div>
+
+<main>
+
+  <section>
+    <h2>The funnel</h2>
+    <p id="funnel-desc">Of all applications, the vast majority either received silence or an automated rejection. Five reached an interview stage. One became a job — for four months, until the position was eliminated.</p>
+    <div class="chart-card"><div id="chart-sankey"></div></div>
+    <div class="insight" id="funnel-insight"></div>
+  </section>
+
+  <section>
+    <h2>Timeline</h2>
+    <p>When applications went out, and what came back. The search accelerated in autumn 2025, quieted over the winter, then picked up again in spring 2026 after the CyberPilot position ended.</p>
+    <div class="legend-row">
+      <span><span class="legend-dot" style="background:#4a9b8f"></span>Interview / offer</span>
+      <span><span class="legend-dot" style="background:#c97f4a"></span>Personal rejection</span>
+      <span><span class="legend-dot" style="background:#d96b6b"></span>Automated rejection</span>
+      <span><span class="legend-dot" style="background:#94a3b8"></span>Ghosted</span>
+      <span><span class="legend-dot" style="background:#cbd5e1;border:1px solid #aaa"></span>Too early</span>
+    </div>
+    <div class="chart-card"><div id="chart-timeline"></div></div>
+  </section>
+
+  <section>
+    <h2>Volume by month</h2>
+    <p id="monthly-desc">Applications sent per calendar month over the course of the search.</p>
+    <div class="chart-card"><div id="chart-monthly"></div></div>
+  </section>
+
+  <section>
+    <h2>Public vs. private</h2>
+    <p>Public sector organisations responded at a noticeably higher rate than private ones. This likely reflects the legal obligation Danish public bodies have to acknowledge applications, rather than a difference in genuine interest.</p>
+    <div class="chart-card"><div id="chart-sector"></div></div>
+    <div class="insight" id="sector-insight"></div>
+  </section>
+
+  <section>
+    <h2>Response rate by location</h2>
+    <p>Response rates across locations with three or more applications.</p>
+    <div class="chart-card"><div id="chart-location"></div></div>
+  </section>
+
+  <section>
+    <h2>Response rate by role type</h2>
+    <p>Response rates across role types with three or more applications.</p>
+    <div class="chart-card"><div id="chart-role"></div></div>
+  </section>
+
+  <section>
+    <h2>What the data says</h2>
+    <p><strong>Silence is the norm.</strong> Nearly half of concluded applications received no reply. This is not a reflection of fit — it is a structural feature of how hiring works here.</p>
+    <p style="margin-top:12px"><strong>The funnel compresses fast.</strong> The drop-off between applying and being seen is steep, and mostly invisible to the applicant.</p>
+    <p style="margin-top:12px"><strong>Language did not hurt English applications.</strong> Contrary to expectation, English-language applications had a slightly higher response rate than Danish-language ones. The likely explanation: English roles often go to larger, more professionally managed HR teams.</p>
+    <p style="margin-top:12px">The search is ongoing. This page updates automatically when the underlying data file is updated.</p>
+  </section>
+
+</main>
+
+<footer>
+  Data collected from email archives and application records, June 2025 – present.
+  Built with Plotly and PapaParse. Part of the <a href="/projects">portfolio</a>.
+</footer>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────
+const CSV_PATH = 'applications.csv';
+
+const C = {
+  teal:     '#4a9b8f',
+  tealMid:  '#3a7a6f',
+  tealDark: '#1a5c52',
+  tealLt:   '#7abcb5',
+  slate:    '#94a3b8',
+  slateLt:  '#cbd5e1',
+  red:      '#d96b6b',
+  amber:    '#c97f4a',
+  dark:     '#1e2d3d',
+  bg:       'rgba(0,0,0,0)',
+};
+
+const OUTCOME_COLOR = {
+  'ghosted':              C.slate,
+  'too early':            C.slateLt,
+  'automated rejection':  C.red,
+  'personal rejection':   C.amber,
+  'phone screening':      C.teal,
+  'first interview':      C.teal,
+  'second interview':     C.tealMid,
+  'offer':                C.tealDark,
+};
+
+const FONT = 'DM Sans, system-ui, sans-serif';
+const BASE = { font: { family: FONT, color: C.dark }, paper_bgcolor: C.bg, plot_bgcolor: C.bg };
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function pct(n, d) { return d === 0 ? 0 : Math.round(n / d * 100); }
+
+function rowOutcome(row) {
+  const fs = row.furthest_stage;
+  if (['offer','second interview','first interview'].includes(fs)) return fs;
+  return row.response_type;
+}
+
+function groupBy(rows, key) {
+  return rows.reduce((acc, r) => {
+    const k = r[key] || 'unknown';
+    acc[k] = (acc[k] || []);
+    acc[k].push(r);
+    return acc;
+  }, {});
+}
+
+function responseRate(rows) {
+  const concluded = rows.filter(r => r.response_type !== 'too early');
+  const responded = concluded.filter(r => r.response_type !== 'ghosted');
+  return { responded: responded.length, concluded: concluded.length, ghosted: concluded.length - responded.length };
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────
+Papa.parse(CSV_PATH, {
+  download: true,
+  header: true,
+  skipEmptyLines: true,
+  complete: ({ data }) => {
+    const rows = data;
+    buildAll(rows);
+  },
+  error: (err) => {
+    console.error('CSV load failed:', err);
+    document.querySelector('main').insertAdjacentHTML('afterbegin',
+      '<p style="color:#d96b6b;padding:20px">Could not load applications.csv — make sure it is in the same folder as this HTML file.</p>');
+  }
+});
+
+function buildAll(rows) {
+  const concluded = rows.filter(r => r.response_type !== 'too early');
+  const ghosted   = rows.filter(r => r.response_type === 'ghosted');
+  const interviews = rows.filter(r => ['first interview','second interview','offer'].includes(r.furthest_stage));
+  const offers    = rows.filter(r => r.furthest_stage === 'offer');
+  const ghostRate = pct(ghosted.length, concluded.length);
+
+  // Stats
+  document.getElementById('stat-total').textContent     = rows.length;
+  document.getElementById('stat-ghost').textContent     = ghostRate + '%';
+  document.getElementById('stat-interview').textContent = interviews.length;
+  document.getElementById('stat-offer').textContent     = offers.length;
+
+  buildSankey(rows, concluded, ghosted);
+  buildTimeline(rows);
+  buildMonthly(rows);
+  buildSector(rows);
+  buildLocation(rows);
+  buildRole(rows);
+}
+
+// ── 1. Sankey ─────────────────────────────────────────────────────────────
+function buildSankey(rows, concluded, ghosted) {
+  const tooEarly       = rows.filter(r => r.response_type === 'too early').length;
+  const autoRej        = rows.filter(r => r.response_type === 'automated rejection').length;
+  const personalRej    = rows.filter(r => r.response_type === 'personal rejection' && r.furthest_stage === 'none').length;
+  const reachedInterview = rows.filter(r => ['first interview','second interview','offer'].includes(r.furthest_stage)).length;
+  // phone screenings that didn't reach interview stage count as personal/no-progress
+  // For Sankey clarity: "reached interview" = furthest_stage in [first,second,offer]
+  // remaining from phone screening go into personal rejection bucket
+  const phoneNoProgress = rows.filter(r => r.response_type === 'phone screening' && r.furthest_stage === 'none').length;
+  const personalTotal   = personalRej; // Middelfart: personal rej but reached 2nd interview — counted under reachedInterview
+
+  const firstOnly    = rows.filter(r => r.furthest_stage === 'first interview').length;
+  const secondRound  = rows.filter(r => r.furthest_stage === 'second interview').length;
+  const offerCount   = rows.filter(r => r.furthest_stage === 'offer').length;
+
+  const n = rows.length;
+
+  const nodeLabels = [
+    `Applied — ${n}`,
+    `Ghosted — ${ghosted.length}`,
+    `Too early — ${tooEarly}`,
+    `Auto-rejected — ${autoRej}`,
+    `Personally rejected — ${personalTotal + phoneNoProgress}`,
+    `Reached interview — ${reachedInterview}`,
+    `First round — ${firstOnly}`,
+    `Second round — ${secondRound}`,
+    `Offer — ${offerCount}`,
+  ];
+
+  const fig = {
+    data: [{
+      type: 'sankey',
+      node: {
+        pad: 18, thickness: 22,
+        line: { color: 'white', width: 0.8 },
+        label: nodeLabels,
+        color: [C.dark, C.slate, C.slateLt, C.red, C.amber, C.teal, C.tealLt, C.tealMid, C.tealDark],
+      },
+      link: {
+        source: [0, 0, 0, 0, 0, 5, 5, 5],
+        target: [1, 2, 3, 4, 5, 6, 7, 8],
+        value:  [ghosted.length, tooEarly, autoRej, personalTotal + phoneNoProgress,
+                 reachedInterview, firstOnly, secondRound, offerCount],
+        color: [
+          'rgba(148,163,184,0.35)',
+          'rgba(203,213,225,0.35)',
+          'rgba(217,107,107,0.35)',
+          'rgba(201,127,74,0.35)',
+          'rgba(74,155,143,0.45)',
+          'rgba(122,188,181,0.45)',
+          'rgba(58,122,111,0.45)',
+          'rgba(26,92,82,0.55)',
+        ],
+      },
+    }],
+    layout: {
+      ...BASE,
+      height: 420,
+      margin: { l: 10, r: 10, t: 10, b: 10 },
+    }
+  };
+
+  Plotly.newPlot('chart-sankey', fig.data, fig.layout, { responsive: true, displayModeBar: false });
+
+  const concluded = rows.filter(r => r.response_type !== 'too early');
+  const ghostPct  = pct(ghosted.length, concluded.length);
+  const silentPct = pct(ghosted.length + autoRej, concluded.length);
+  document.getElementById('funnel-insight').textContent =
+    `${ghostPct}% of concluded applications received no reply. ` +
+    `Combined with automated rejections, ${silentPct}% were resolved without any human contact.`;
+}
+
+// ── 2. Timeline ───────────────────────────────────────────────────────────
+function buildTimeline(rows) {
+  const dated = rows.filter(r => r.date_applied).sort((a,b) => a.date_applied.localeCompare(b.date_applied));
+  const OUTCOME_ORDER = ['offer','second interview','first interview','personal rejection','automated rejection','too early','ghosted'];
+
+  const traces = OUTCOME_ORDER.map(outcome => {
+    const g = dated.filter(r => rowOutcome(r) === outcome);
+    return {
+      type: 'scatter', mode: 'markers', name: outcome,
+      x: g.map(r => r.date_applied),
+      y: g.map(() => outcome),
+      text: g.map(r => r.company),
+      marker: {
+        color: OUTCOME_COLOR[outcome] || C.teal,
+        size: 11, opacity: 0.85,
+        symbol: outcome === 'offer' ? 'star' : 'circle',
+        line: { width: 1, color: 'white' },
+      },
+      hovertemplate: '<b>%{text}</b><br>%{x}<extra></extra>',
+      showlegend: false,
+    };
+  });
+
+  Plotly.newPlot('chart-timeline', traces, {
+    ...BASE,
+    height: 310,
+    margin: { l: 175, r: 20, t: 20, b: 30 },
+    xaxis: { showgrid: true, gridcolor: '#e5e7eb', tickformat: '%b %Y' },
+    yaxis: { showgrid: true, gridcolor: '#f0f0f0', categoryorder: 'array', categoryarray: OUTCOME_ORDER },
+  }, { responsive: true, displayModeBar: false });
+}
+
+// ── 3. Monthly volume ─────────────────────────────────────────────────────
+function buildMonthly(rows) {
+  const dated = rows.filter(r => r.date_applied);
+  const monthly = {};
+  dated.forEach(r => {
+    const m = r.date_applied.slice(0, 7); // YYYY-MM
+    monthly[m] = (monthly[m] || 0) + 1;
+  });
+  const keys = Object.keys(monthly).sort();
+  const vals = keys.map(k => monthly[k]);
+
+  const peak = keys[vals.indexOf(Math.max(...vals))];
+  const peakN = Math.max(...vals);
+  document.getElementById('monthly-desc').textContent =
+    `Applications sent per calendar month. The busiest month was ${formatMonth(peak)} with ${peakN} applications sent.`;
+
+  Plotly.newPlot('chart-monthly', [{
+    type: 'bar', x: keys, y: vals,
+    marker: { color: C.teal, opacity: 0.85 },
+    hovertemplate: '%{x}<br><b>%{y}</b> applications<extra></extra>',
+    width: 0.7,
+  }], {
+    ...BASE,
+    height: 260,
+    margin: { l: 40, r: 20, t: 20, b: 60 },
+    xaxis: { showgrid: false, tickangle: -40 },
+    yaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Applications', dtick: 5 },
+  }, { responsive: true, displayModeBar: false });
+}
+
+// ── 4. Sector ─────────────────────────────────────────────────────────────
+function buildSector(rows) {
+  const bySector = groupBy(rows, 'sector');
+  const sectors  = ['private', 'public'].filter(s => bySector[s]);
+  const labels   = sectors.map(s => {
+    const total = bySector[s].length;
+    return `${s.charAt(0).toUpperCase() + s.slice(1)} (${total} applications)`;
+  });
+  const rates = sectors.map(s => responseRate(bySector[s]));
+
+  Plotly.newPlot('chart-sector', [
+    {
+      type: 'bar', orientation: 'h', name: 'Ghosted',
+      y: labels, x: rates.map(r => r.ghosted),
+      marker: { color: C.slate, opacity: 0.55 },
+      text: rates.map(r => `${r.ghosted} ghosted`),
+      textposition: 'inside', insidetextanchor: 'middle',
+      textfont: { color: C.dark, size: 12, family: FONT },
+      hovertemplate: '%{y}<br>Ghosted: %{x}<extra></extra>',
+    },
+    {
+      type: 'bar', orientation: 'h', name: 'Responded',
+      y: labels, x: rates.map(r => r.responded),
+      marker: { color: C.teal, opacity: 0.90 },
+      text: rates.map((r,i) => `${r.responded} responded (${pct(r.responded, r.concluded)}%)`),
+      textposition: 'inside', insidetextanchor: 'middle',
+      textfont: { color: 'white', size: 12, family: FONT },
+      hovertemplate: '%{y}<br>Responded: %{x}<extra></extra>',
+    },
+  ], {
+    ...BASE,
+    barmode: 'stack',
+    height: 200,
+    margin: { l: 220, r: 30, t: 20, b: 50 },
+    xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Number of applications', dtick: 10 },
+    yaxis: { showgrid: false },
+    legend: { orientation: 'h', y: -0.35, font: { size: 12 }, traceorder: 'reversed' },
+  }, { responsive: true, displayModeBar: false });
+
+  const privRate = pct(rates[0].responded, rates[0].concluded);
+  const pubRate  = pct(rates[1].responded, rates[1].concluded);
+  document.getElementById('sector-insight').textContent =
+    `Private companies ghosted at a significantly higher rate. ` +
+    `Of ${rates[0].concluded} concluded private applications, ${rates[0].ghosted} received no reply. ` +
+    `Public sector response rate: ${pubRate}% vs. private: ${privRate}%.`;
+}
+
+// ── 5. Location ───────────────────────────────────────────────────────────
+function buildLocation(rows) {
+  const byLoc = groupBy(rows, 'location');
+  const locs = Object.entries(byLoc)
+    .map(([loc, rs]) => ({ loc, ...responseRate(rs) }))
+    .filter(d => d.concluded >= 3)
+    .map(d => ({ ...d, rate: pct(d.responded, d.concluded) }))
+    .sort((a,b) => a.rate - b.rate);
+
+  Plotly.newPlot('chart-location', [{
+    type: 'bar', orientation: 'h',
+    x: locs.map(d => d.rate),
+    y: locs.map(d => d.loc),
+    marker: { color: locs.map(d => d.rate >= 50 ? C.teal : C.slate), opacity: 0.85 },
+    text: locs.map(d => `${d.rate}%  (${d.responded}/${d.concluded})`),
+    textposition: 'outside',
+    hovertemplate: '%{y}: %{x}% response rate<extra></extra>',
+  }], {
+    ...BASE,
+    height: Math.max(220, locs.length * 36 + 60),
+    margin: { l: 110, r: 140, t: 20, b: 50 },
+    xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Response rate (%)', range: [0, 130] },
+    yaxis: { showgrid: false, title: 'Location' },
+  }, { responsive: true, displayModeBar: false });
+}
+
+// ── 6. Role type ──────────────────────────────────────────────────────────
+function buildRole(rows) {
+  const byRole = groupBy(rows, 'role_type');
+  const roles = Object.entries(byRole)
+    .map(([role, rs]) => ({ role, ...responseRate(rs) }))
+    .filter(d => d.concluded >= 3)
+    .map(d => ({ ...d, rate: pct(d.responded, d.concluded) }))
+    .sort((a,b) => a.rate - b.rate);
+
+  Plotly.newPlot('chart-role', [{
+    type: 'bar', orientation: 'h',
+    x: roles.map(d => d.rate),
+    y: roles.map(d => d.role),
+    marker: { color: roles.map(d => d.rate >= 50 ? C.teal : C.slate), opacity: 0.85 },
+    text: roles.map(d => `${d.rate}%  (${d.responded}/${d.concluded})`),
+    textposition: 'outside',
+    hovertemplate: '%{y}: %{x}% response rate<extra></extra>',
+  }], {
+    ...BASE,
+    height: Math.max(200, roles.length * 36 + 60),
+    margin: { l: 140, r: 140, t: 20, b: 50 },
+    xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Response rate (%)', range: [0, 130] },
+    yaxis: { showgrid: false },
+  }, { responsive: true, displayModeBar: false });
+}
+
+// ── Util ──────────────────────────────────────────────────────────────────
+function formatMonth(ym) {
+  const [y, m] = ym.split('-');
+  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${names[parseInt(m,10)-1]} ${y}`;
+}
+</script>
+</body>
+</html>
