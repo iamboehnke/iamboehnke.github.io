@@ -408,10 +408,18 @@
       },
     ], baseLayout({
       barmode: 'stack', height: 200,
-      margin: { l:250,r:30,t:20,b:50 },
-      xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Number of applications', dtick: 10 },
+      margin: { l:250, r:30, t:20, b:70 },
+      xaxis: { showgrid: true, gridcolor: '#e5e7eb', dtick: 10 },
       yaxis: { showgrid: false },
-      legend: {showlegend: false},
+      legend: { orientation: 'h', y: -0.35, font: { size: 12 }, traceorder: 'reversed' },
+      annotations: [{
+        text: 'Number of applications',
+        x: 0.5, y: -0.22,
+        xref: 'paper', yref: 'paper',
+        showarrow: false,
+        font: { size: 12 },
+        xanchor: 'center',
+      }],
     }), CFG);
 
     const pr = pct(rates[0].responded, rates[0].concluded);
