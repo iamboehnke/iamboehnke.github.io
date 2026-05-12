@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A data visualization of Mikkel Bøhnke's graduate job search — 92 applications, ghosting rates, funnel drop-off, and response rates by sector." />
+  <meta name="description" content="A data visualization of Mikkel Bøhnke's graduate job search - 92 applications, ghosting rates, funnel drop-off, and response rates by sector." />
   <script>
   (function() {
     var saved = localStorage.getItem('theme');
@@ -118,17 +118,17 @@
       <div class="article-body">
 
         <h2>What it is</h2>
-        <p>92 applications, 11 months and still going. A data visualization of my own job search — ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
+        <p>92 applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
 
         <div class="stats-inline">
-          <div class="stat-box"><span class="stat-n" id="stat-total">—</span><span class="stat-label">Applications</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-ghost">—</span><span class="stat-label">Ghosting rate</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-interview">—</span><span class="stat-label">Interviews</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-offer">—</span><span class="stat-label">Offers</span></div>
+          <div class="stat-box"><span class="stat-n" id="stat-total">-</span><span class="stat-label">Applications</span></div>
+          <div class="stat-box"><span class="stat-n" id="stat-ghost">-</span><span class="stat-label">Ghosting rate</span></div>
+          <div class="stat-box"><span class="stat-n" id="stat-interview">-</span><span class="stat-label">Interviews</span></div>
+          <div class="stat-box"><span class="stat-n" id="stat-offer">-</span><span class="stat-label">Offers</span></div>
         </div>
 
         <h2>The funnel</h2>
-        <p id="funnel-desc">Of all applications, the vast majority either received no reply or an automated rejection. Five reached an interview stage. One became a job — for four months, until the position was eliminated.</p>
+        <p id="funnel-desc">Of all applications, the vast majority either received no reply or an automated rejection. Five reached an interview stage. One became a job - for four months, until the position was eliminated.</p>
         <div class="chart-card"><div id="chart-sankey"></div></div>
         <div class="callout"><p id="funnel-insight"></p></div>
 
@@ -161,7 +161,7 @@
         <div class="chart-card"><div id="chart-role"></div></div>
 
         <h2>What the data says</h2>
-        <p><strong>Silence is the norm.</strong> Nearly half of concluded applications received no reply. This is not a reflection of fit — it is a structural feature of how hiring works here.</p>
+        <p><strong>Silence is the norm.</strong> Nearly half of concluded applications received no reply. This is not a reflection of fit - it is a structural feature of how hiring works here.</p>
         <p>The funnel compresses fast. The drop-off between applying and being seen is steep, and almost entirely invisible to the applicant.</p>
         <p>English-language applications to Danish companies had a slightly higher response rate than Danish-language ones. The likely explanation: English roles tend to go to larger organisations with more professionally managed HR teams.</p>
         <p>The search is ongoing. This page updates automatically when the underlying data file is updated.</p>
@@ -248,7 +248,7 @@
       ['chart-sankey','chart-timeline','chart-monthly',
        'chart-sector','chart-location','chart-role'].forEach(id => {
         document.getElementById(id).innerHTML =
-          '<p class="error-msg">Could not load applications.csv — check the CSV_PATH variable and that the file is committed to the repo.</p>';
+          '<p class="error-msg">Could not load applications.csv - check the CSV_PATH variable and that the file is committed to the repo.</p>';
       });
     }
   });
@@ -288,10 +288,10 @@
     const n          = rows.length;
 
     const labels = [
-      `Applied — ${n}`, `Ghosted — ${ghosted}`, `Too early — ${tooEarly}`,
-      `Auto-rejected — ${autoRej}`, `Personally rejected — ${persFinal + phoneNone}`,
-      `Reached interview — ${reached}`, `First round — ${firstOnly}`,
-      `Second round — ${second}`, `Offer — ${offer}`,
+      `Applied - ${n}`, `Ghosted - ${ghosted}`, `Too early - ${tooEarly}`,
+      `Auto-rejected - ${autoRej}`, `Personally rejected - ${persFinal + phoneNone}`,
+      `Reached interview - ${reached}`, `First round - ${firstOnly}`,
+      `Second round - ${second}`, `Offer - ${offer}`,
     ];
 
     Plotly.newPlot('chart-sankey', [{
