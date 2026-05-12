@@ -1,0 +1,94 @@
+company,sector,role_type,location,date_applied,language,response_received,response_type,furthest_stage,notes
+Middelfart Kommune,public,data analyst,Middelfart,2026-02-11,Danish,TRUE,personal rejection,second interview,Dataspecialist. Confirmed Feb 11. Case sent Mar 10. Rejected Mar 20. Very close decision - retained CV.
+GF Forsikring,private,data analyst,Odense,2025-12-19,Danish,FALSE,ghosted,none,No application confirmation found - likely applied via portal around this date.
+TV 2 Danmark,private,data engineer,Odense,2025-08-04,Danish,FALSE,ghosted,none,Data Engineer til Data Foundation.
+Sunset Boulevard,private,data engineer,Copenhagen,2025-06-30,Danish,TRUE,automated rejection,none,Data Engineer. Rejected Jul 2.
+Bankdata,private,data engineer,Fredericia,2025-08-04,Danish,FALSE,ghosted,none,Login activity found Aug 4. No application confirmation email found.
+Fyns Politi,public,data analyst,Odense,2025-12-24,Danish,TRUE,automated rejection,none,1-2 tele- og dataanalytikere til Efterforskningsstaben. Rejected Mar 11 2026.
+Solita,private,data scientist,other,2025-07-24,English,TRUE,personal rejection,none,Rejected Jul 25.
+Krifa,private,data scientist,other,2025-07-24,Danish,TRUE,personal rejection,none,Data Scientist til nyt AI-team. Over 100 applications. Rejected Aug 8.
+Lyreco,private,data analyst,other,2025-10-31,Danish,FALSE,ghosted,none,Sales Excellence Data Analyst.
+Trefor,private,data analyst,Odense,2025-07-29,Danish,TRUE,automated rejection,none,Driftskonsulent til Målerdata. Rejected Aug 28.
+TV 2 Danmark,private,other,Odense,2025-09-08,Danish,FALSE,ghosted,none,Cyber Security Specialist. Stretch application.
+Børn- og Ungeforvaltningen,public,data analyst,Odense,2025-08-13,Danish,FALSE,ghosted,none,Datastærk analysekonsulent - Odense Kommune.
+Region Syddanmark,public,ai engineer,Odense,2025-08-27,Danish,TRUE,automated rejection,none,AI-proceskonsulent til Regional IT (ref 233372). Rejected Oct 6.
+Energinet,public,ai engineer,other,2026-02-15,Danish,TRUE,automated rejection,none,AI Engineers i Analytics & AI. Rejected Feb 19.
+TV 2 Danmark,private,data engineer,Odense,2025-09-26,Danish,FALSE,ghosted,none,Data Engineer til Play Content Recommendations.
+Energi Fyn,private,data analyst,Odense,2025-09-09,Danish,FALSE,ghosted,none,Uopfordret ansøgning. Auto-acknowledgment Sep 10. No further contact.
+N1,private,data analyst,other,,English,FALSE,ghosted,none,No email confirmation found.
+Søstrene Grene,private,data scientist,Aarhus,2025-09-17,English,TRUE,personal rejection,none,AI Data Scientist. Personal rejection Sep 29.
+Arla,private,data engineer,Viby,2025-09-22,English,TRUE,automated rejection,none,Data Platform Operations Engineer. Rejected Sep 23.
+DLG,private,data analyst,Copenhagen,2025-09-24,English,TRUE,phone screening,second interview,Risk Data & Analytics Manager. Phone screen Sep 25. Second interview Oct 14. Psychometric assessment (Oasys) invited Nov 21. No final response.
+JN Data,private,data analyst,Copenhagen,2025-09-19,Danish,TRUE,personal rejection,none,Security Data Analyst & Reporting Specialist. Rejected Nov 13.
+Damstahl,private,other,other,2025-09-19,Danish,TRUE,automated rejection,none,AI Implementation Consultant. Rejected Oct 21.
+Userlink,private,business analyst,other,,,FALSE,ghosted,none,No email confirmation found.
+Vipps MobilePay,private,data analyst,Copenhagen,2025-09-22,English,TRUE,automated rejection,none,First application. Rejected Oct 22.
+TV 2 Danmark,private,data analyst,Odense,2025-11-13,Danish,FALSE,ghosted,none,Advanced Data Analyst.
+LEGO,private,data scientist,Billund,2025-10-07,English,TRUE,automated rejection,none,Data Scientist / ML Engineer - parental leave cover. Rejected Oct 7.
+Lederne,ngo,data analyst,Copenhagen,2025-10-08,Danish,TRUE,automated rejection,none,Data Analyst. 137 applications received. Rejected Nov 10.
+DataPeeps,private,data scientist,other,2025-10-08,Danish,TRUE,personal rejection,none,Junior Data Scientist. Rejected Oct 20.
+Bedre Nætter,private,data analyst,Copenhagen,2025-10-08,Danish,FALSE,ghosted,none,Dataspecialist.
+SDU,public,data scientist,Odense,2025-10-09,Danish,FALSE,ghosted,none,Tre stillinger i ny AI Hub.
+UFST,public,business analyst,Copenhagen,2025-10-09,Danish,TRUE,automated rejection,none,Udviklings- og Forenklingsstyrelsen. Business Analyst til AI-udvikling (ID 150820). Rejected Oct 30.
+KIT,other,data analyst,other,,,FALSE,ghosted,none,No email confirmation found.
+Spillemyndigheden,public,data analyst,Copenhagen,2025-10-16,Danish,FALSE,ghosted,none,Erfaren medarbejder til databaseudvikling og dataanalyse.
+Social- og Boligstyrelsen,public,data analyst,Copenhagen,2025-10-17,Danish,FALSE,ghosted,none,First application via Jobnet.
+Danfoss,private,data scientist,Nordborg,2025-10-16,English,TRUE,automated rejection,none,Data Scientist - Turning Data into Business Value. Rejected Nov 1.
+DR,public,data analyst,Copenhagen,2025-10-27,Danish,TRUE,automated rejection,none,Dataspecialist for DR Analyse. Profile created Oct 27. Rejected Dec 3.
+Vipps MobilePay,private,data analyst,Copenhagen,2025-10-27,English,FALSE,ghosted,none,Second application.
+CyberPilot,private,ai engineer,Aarhus,2025-11-10,Danish,TRUE,phone screening,offer,AI & Data Engineer. Applied via LinkedIn. Got the job. Started Jan 2026. Position later eliminated.
+BESTSELLER,private,data scientist,Brande,2025-10-30,English,TRUE,automated rejection,none,Data Scientist. Rejected Nov 26.
+Region Midtjylland,public,data scientist,Aarhus,2025-10-31,Danish,FALSE,ghosted,none,AI-specialist med teknisk dybde og strategisk overblik.
+Tryg,private,business analyst,Copenhagen,2025-10-31,Danish,FALSE,ghosted,none,Business Analyst med passion for data - barselsvikariat.
+Sydøstjyllands Politi,public,data analyst,Horsens,2025-11-05,Danish,TRUE,phone screening,first interview,Analytiker til efterretnings- og analyseenheden. Got 30-min interview. Did not progress.
+Nabla,private,data scientist,,,,FALSE,ghosted,none,No email confirmation found.
+Clever A/S,private,data analyst,Copenhagen,2025-11-05,Danish,FALSE,ghosted,none,
+CDDA (Københavns Kommune),public,data analyst,Copenhagen,2025-11-07,Danish,TRUE,automated rejection,none,"Datamedarbejder til Center for Digitalisering, Data og Analyse - Socialforvaltningen. Rejected Jan 8 2026."
+Vurderingsstyrelsen,public,data analyst,Copenhagen,2025-11-07,Danish,TRUE,automated rejection,none,"Forretningsanalytikere med flair for styring, analyse og BI (ID 152438). Rejected Dec 11."
+Carlsberg,private,data analyst,Copenhagen,2025-11-25,English,TRUE,automated rejection,none,IT Digital Graduate. Rejected Dec 5.
+LEGO,private,data scientist,Billund,,English,FALSE,ghosted,none,Second LEGO application. No email confirmation found.
+Mindway AI,private,data scientist,Copenhagen,2025-11-20,English,TRUE,personal rejection,none,ML Engineer. Rejected Dec 1.
+TV 2 Danmark,private,data analyst,Odense,2025-12-17,Danish,TRUE,automated rejection,none,Data Analyst til Asset Management i TV 2 Teknologi. Rejected Jan 6 2026.
+Arla,private,data scientist,Viby,2026-01-05,English,TRUE,automated rejection,none,IT Graduate Programme 2026. Got to HireVue video interview stage. Rejected Feb 13.
+Bankdata,private,data engineer,Fredericia,2025-12-15,Danish,FALSE,ghosted,none,Login activity Dec 15. No application confirmation email found.
+TV 2 Danmark,private,data engineer,Odense,2026-04-13,Danish,TRUE,automated rejection,none,Erfaren Data Engineer til TV 2s Dataplatform. Rejected Apr 15.
+GF Forsikring,private,data analyst,Odense,2026-04-10,Danish,FALSE,too early,none,Uopfordret ansøgning til IT-afdelinger i Odense og København. Added to candidate bank.
+Regionshospitalet Horsens,public,data analyst,Horsens,,Danish,FALSE,ghosted,none,No email confirmation found.
+Danfoss,private,data scientist,Nordborg,2025-12-22,English,TRUE,automated rejection,none,Data Scientist - Shape the Future of AI. Rejected Jan 23 2026.
+PET,public,ai engineer,Copenhagen,2025-12-22,Danish,TRUE,automated rejection,none,MLOps engineer. Rejected Feb 5 2026.
+Satre,private,data analyst,other,,Danish,FALSE,ghosted,none,No email confirmation found.
+Fyns Politi,public,data analyst,Odense,2026-03-21,Danish,TRUE,automated rejection,none,Civil medarbejder til efterforskning af økonomisk kriminalitet. Rejected Apr 30.
+Syd- og Sønderjyllands Politi,public,data analyst,other,2025-12-26,Danish,TRUE,automated rejection,none,Dataanalytiker til Teknisk Efterforskning. Rejected Jan 23 2026.
+OBH Rådgivende Ingeniører,private,business analyst,Odense,2026-01-25,Danish,FALSE,ghosted,none,Forretningsanalytiker til Huseftersyn.
+Styrelsen for Grøn Arealomlægning og Vandmiljø,public,data analyst,Copenhagen,,Danish,FALSE,ghosted,none,No email confirmation found.
+Middelfart Kommune,public,data analyst,Middelfart,,Danish,FALSE,ghosted,none,Possible second application - no email confirmation found.
+Energinet,public,data engineer,other,2026-02-15,Danish,TRUE,personal rejection,none,Data Engineer - Integration Quality & Visualization. Recruiter Maria (talentech). Rejected Mar 12.
+Social- og Boligstyrelsen,public,data analyst,Copenhagen,2026-02-25,Danish,TRUE,personal rejection,none,Stærke dataprofiler til kontor for Data og Analyse. Rejected Apr 22.
+Sydøstjyllands Politi,public,data analyst,Horsens,2026-03-23,Danish,FALSE,ghosted,none,Two applications: Analytiker organiseret kriminalitet AND tele- og dataanalyse.
+Sydøstjyllands Politi,public,data analyst,Horsens,2026-03-23,Danish,TRUE,personal rejection,first interview,Two applications: Analytiker organiseret kriminalitet AND tele- og dataanalyse.
+DLG,private,data analyst,Copenhagen,2026-04-30,Danish,FALSE,too early,none,BI-konsulent til Sustainability. Confirmation Apr 30.
+DLG,private,data analyst,Copenhagen,,English,FALSE,ghosted,none,Third DLG application. No email confirmation found.
+Region Syddanmark,public,ai engineer,Odense,2026-04-23,Danish,FALSE,too early,none,AI-proceskonsulent til Regional IT (ref 235683). Third Regional IT application overall.
+Universal Robots,private,data analyst,Odense,2026-04-20,English,TRUE,automated rejection,none,Data Analyst - Business Insights & Forecasting. Rejected May 6.
+SundK (Region Midtjylland),public,data analyst,Aarhus,2026-04-23,Danish,FALSE,too early,none,Datamanager til Sundhedsvæsenets Kvalitetsinstitut. Confirmation Apr 23.
+Sygehus Lillebælt,public,data analyst,Kolding,2026-04-25,Danish,FALSE,too early,none,"Datakonsulent, Økonomi- og planlægningsafdelingen (ref 235525). Confirmation Apr 25."
+Vejle Kommune,public,ai engineer,Vejle,2026-05-08,Danish,FALSE,too early,none,AI-builder til Ny-Teknologi-Gruppe (NTG) i Digitalisering & IT. Confirmation May 8.
+Center for Digital Psykiatri,public,data analyst,other,2026-04-28,Danish,FALSE,too early,none,"Datamanager, Center for Digital Psykiatri (ref 235738). Confirmation Apr 28."
+DLG,private,data analyst,Copenhagen,,English,FALSE,ghosted,none,Fourth DLG application. No email confirmation found.
+Horsens Kommune,public,data analyst,Horsens,2026-05-01,Danish,FALSE,too early,none,Medarbejder til udvikling af AI-agenter og AI-platform. Confirmation May 1.
+Facit Bank,private,data analyst,other,,Danish,FALSE,ghosted,none,No email confirmation found.
+OUH (Region Syddanmark),public,data analyst,Odense,2026-03-21,Danish,TRUE,phone screening,first interview,Ingeniør Blodprøver og Biokemi (ref 235301). Had interview Apr 17. Rejected Apr 20.
+B Company,private,data analyst,other,,Danish,FALSE,ghosted,none,No email confirmation found.
+Region Syddanmark,public,data analyst,Odense,2026-04-19,Danish,TRUE,automated rejection,none,Datamanager Økonomi og Data (ref 235510). Rejected May 5.
+LEGO,private,data scientist,Billund,,English,FALSE,ghosted,none,Third LEGO application. No email confirmation found.
+Autoproff,private,data analyst,Vejle,2026-05-11,English,TRUE,automated rejection,none,Advanced Pricing Analyst. Rejected May 11 (same day).
+Vejle Kommune,public,data analyst,Vejle,2026-04-27,Danish,FALSE,too early,none,Analysekonsulent til Arbejdsmarkedsøkonomi & Styring. Confirmation Apr 27.
+Nyborg Kommune,public,data analyst,Nyborg,2026-05-08,Danish,FALSE,too early,none,Datakonsulent og teamkoordinator. Confirmation received May 8.
+Børn- og Ungeforvaltningen,public,data analyst,Odense,2026-05-11,Danish,FALSE,too early,none,Datastærk analysekonsulent - barselsvikariat. Applied today.
+Spillemyndigheden,public,data analyst,Copenhagen,2025-11-29,Danish,FALSE,ghosted,none,Medarbejder til statistik og analyser af spilmarkedet. Second Spillemyndigheden application.
+Region Midtjylland,public,data analyst,Aarhus,2025-12-19,Danish,TRUE,personal rejection,none,Datakonsulent - sundhedsdatas potentialer i tværsektoriel forskning. Forskningsenheden. Rejected Jan 29 2026.
+dao distribution,private,data analyst,Fredericia,2026-03-21,Danish,TRUE,personal rejection,none,Data analytiker - kvalitet og sikkerhed. Rejected May 4 2026.
+Carlsberg,private,data analyst,Copenhagen,2026-02-05,English,TRUE,automated rejection,none,Application and Data Specialist - Supply Chain. Rejected Feb 5.
+Vipps MobilePay,private,data analyst,Copenhagen,2025-11-12,English,FALSE,ghosted,none,Third application to Vipps MobilePay.
+Region Syddanmark,public,ai engineer,Odense,2026-05-07,Danish,FALSE,too early,none,"Automatiseringskonsulent, Regional IT (ref 235891). Fourth Regional IT application."
+OUH (Region Syddanmark),public,data scientist,Odense,2026-05-04,Danish,FALSE,too early,none,"Biostatistiker, Klinisk Udvikling (ref 235777). Confirmation May 4. Different from earlier OUH application (interview Apr 17)."
