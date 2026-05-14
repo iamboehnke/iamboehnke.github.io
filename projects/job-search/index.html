@@ -118,8 +118,7 @@
       <div class="article-body">
 
         <h2>What it is</h2>
-        <p>92 applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
-
+        <p><span id="text-total">—</span> applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
         <div class="stats-inline">
           <div class="stat-box"><span class="stat-n" id="stat-total">-</span><span class="stat-label">Applications</span></div>
           <div class="stat-box"><span class="stat-n" id="stat-ghost">-</span><span class="stat-label">Ghosting rate</span></div>
@@ -128,7 +127,7 @@
         </div>
 
         <h2>The funnel</h2>
-        <p id="funnel-desc">Of all applications, the vast majority either received no reply or an automated rejection. Five reached an interview stage. One became a job - for four months, until the position was eliminated.</p>
+        <p id="funnel-desc">Of all applications, the vast majority either received no reply or an automated rejection. <span id="text-interviews">—</span> reached an interview stage. One became a job — for four months, until the position was eliminated.</p>
         <div class="chart-card"><div id="chart-sankey"></div></div>
         <div class="callout"><p id="funnel-insight"></p></div>
 
@@ -259,10 +258,12 @@
     const interviews = rows.filter(r => ['first interview','second interview','offer'].includes(r.furthest_stage));
     const offers     = rows.filter(r => r.furthest_stage === 'offer');
 
-    document.getElementById('stat-total').textContent     = rows.length;
-    document.getElementById('stat-ghost').textContent     = pct(ghosted.length, concluded.length) + '%';
-    document.getElementById('stat-interview').textContent = interviews.length;
-    document.getElementById('stat-offer').textContent     = offers.length;
+    document.getElementById('stat-total').textContent       = rows.length;
+    document.getElementById('text-total').textContent       = rows.length;
+    document.getElementById('text-interviews').textContent  = interviews.length;
+    document.getElementById('stat-ghost').textContent       = pct(ghosted.length, concluded.length) + '%';
+    document.getElementById('stat-interview').textContent   = interviews.length;
+    document.getElementById('stat-offer').textContent       = offers.length;
 
     buildSankey(rows);
     buildTimeline(rows);
