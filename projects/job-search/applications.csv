@@ -70,13 +70,13 @@ DLG,private,data analyst,Copenhagen,2026-04-30,Danish,FALSE,too early,none,BI-ko
 DLG,private,data analyst,Copenhagen,,English,FALSE,ghosted,none,Third DLG application. No email confirmation found.
 Region Syddanmark,public,ai engineer,Odense,2026-04-23,Danish,FALSE,too early,none,AI-proceskonsulent til Regional IT (ref 235683). Third Regional IT application overall.
 Universal Robots,private,data analyst,Odense,2026-04-20,English,TRUE,automated rejection,none,Data Analyst - Business Insights & Forecasting. Rejected May 6.
-SundK (Region Midtjylland),public,data analyst,Aarhus,2026-04-23,Danish,FALSE,too early,none,Datamanager til Sundhedsvæsenets Kvalitetsinstitut. Confirmation Apr 23.
+SundK (Region Midtjylland),public,data analyst,Aarhus,2026-04-23,Danish,TRUE,phone screening,first interview,Datamanager til Sundhedsvæsenets Kvalitetsinstitut. Confirmation Apr 23.
 Sygehus Lillebælt,public,data analyst,Kolding,2026-04-25,Danish,FALSE,too early,none,"Datakonsulent, Økonomi- og planlægningsafdelingen (ref 235525). Confirmation Apr 25."
 Vejle Kommune,public,ai engineer,Vejle,2026-05-08,Danish,FALSE,too early,none,AI-builder til Ny-Teknologi-Gruppe (NTG) i Digitalisering & IT. Confirmation May 8.
-Center for Digital Psykiatri,public,data analyst,other,2026-04-28,Danish,FALSE,too early,none,"Datamanager, Center for Digital Psykiatri (ref 235738). Confirmation Apr 28."
+Center for Digital Psykiatri,public,data analyst,other,2026-04-28,Danish,TRUE,automated rejection,none,"Datamanager, Center for Digital Psykiatri (ref 235738). Confirmation Apr 28."
 DLG,private,data analyst,Copenhagen,,English,FALSE,ghosted,none,Fourth DLG application. No email confirmation found.
 Horsens Kommune,public,data analyst,Horsens,2026-05-01,Danish,FALSE,too early,none,Medarbejder til udvikling af AI-agenter og AI-platform. Confirmation May 1.
-Facit Bank,private,data analyst,other,,Danish,FALSE,ghosted,none,No email confirmation found.
+Facit Bank,private,data analyst,other,,Danish,TRUE,automated rejection,none,Email confirmation found.
 OUH (Region Syddanmark),public,data analyst,Odense,2026-03-21,Danish,TRUE,phone screening,first interview,Ingeniør Blodprøver og Biokemi (ref 235301). Had interview Apr 17. Rejected Apr 20.
 B Company,private,data analyst,other,,Danish,FALSE,ghosted,none,No email confirmation found.
 Region Syddanmark,public,data analyst,Odense,2026-04-19,Danish,TRUE,automated rejection,none,Datamanager Økonomi og Data (ref 235510). Rejected May 5.
@@ -92,3 +92,4 @@ Carlsberg,private,data analyst,Copenhagen,2026-02-05,English,TRUE,automated reje
 Vipps MobilePay,private,data analyst,Copenhagen,2025-11-12,English,FALSE,ghosted,none,Third application to Vipps MobilePay.
 Region Syddanmark,public,ai engineer,Odense,2026-05-07,Danish,FALSE,too early,none,"Automatiseringskonsulent, Regional IT (ref 235891). Fourth Regional IT application."
 OUH (Region Syddanmark),public,data scientist,Odense,2026-05-04,Danish,FALSE,too early,none,"Biostatistiker, Klinisk Udvikling (ref 235777). Confirmation May 4. Different from earlier OUH application (interview Apr 17)."
+Kolding kommune,puplic,ai engineer,Kolding,2026-05-14,Danish,FALSE,too early,none,"Perfekt stilling til mig, så håber de finder mig spændende."
