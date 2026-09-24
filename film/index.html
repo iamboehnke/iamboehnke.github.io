@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Mikkel Bøhnke, video og foto</title>
+<meta property="og:title" content="Mikkel Bøhnke, video og foto">
+<meta property="og:description" content="Et udvalg af mine videoer og billeder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #F6F7F9;
+  --surface: #FFFFFF;
+  --ink: #171A20;
+  --muted: #5B6473;
+  --slate: #44546A;
+  --rule: #CDD4DE;
+  --tint: #E9EDF3;
+  --focus: #2F5D9E;
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151A;
+    --surface: #181C22;
+    --ink: #EEF0F3;
+    --muted: #9AA4B2;
+    --slate: #9FB2CC;
+    --rule: #2C333D;
+    --tint: #1B2028;
+    --focus: #8DB4E8;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 1rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.wrap { max-width: 60rem; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+.name {
+  margin: 0; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2.1rem, 7vw, 3.6rem); line-height: 1.15;
+  letter-spacing: 0.3em; text-transform: uppercase;
+}
+.name span { display: block; }
+.name .last { color: var(--slate); }
+.name-rule { border: 0; border-top: 1px solid var(--slate); margin: 1.25rem 0 1.5rem; }
+.intro { max-width: 38rem; margin: 0 0 0.75rem; font-size: 1.0625rem; }
+.contact { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+.contact a { text-underline-offset: 0.2em; }
+
+section { margin-top: 3.5rem; }
+h2 {
+  margin: 0; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--serif); font-weight: 400; font-size: 1.6rem; letter-spacing: 0.04em;
+}
+
+.video {
+  position: relative; display: grid; grid-template-columns: 8rem 1fr auto;
+  gap: 0.25rem 1.5rem; align-items: baseline;
+  margin: 0 -1rem; padding: 1.5rem 1rem; border-bottom: 1px solid var(--rule);
+}
+.video:hover { background: var(--tint); }
+.kind { font-family: var(--serif); font-style: italic; font-size: 1.0625rem; color: var(--slate); }
+.v-title { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 1.6rem; line-height: 1.2; }
+.v-title a { color: inherit; text-decoration: none; }
+.v-title a::after { content: ""; position: absolute; inset: 0; }
+.v-title a:focus-visible { outline: none; }
+.v-title a:focus-visible::after { outline: 2px solid var(--focus); outline-offset: -2px; }
+.video:hover .v-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.v-meta { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+.v-go { color: var(--slate); font-size: 0.9375rem; font-weight: 500; white-space: nowrap; text-decoration: underline; text-underline-offset: 0.25em; }
+
+.photos { column-count: 3; column-gap: 0.75rem; padding-top: 1.5rem; }
+.ph { break-inside: avoid; margin: 0 0 0.75rem; }
+.ph button { display: block; width: 100%; padding: 0; border: 0; background: var(--tint); cursor: zoom-in; border-radius: 2px; overflow: hidden; }
+.ph img { display: block; width: 100%; height: auto; }
+
+dialog.lb { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; overflow: visible; }
+dialog.lb::backdrop { background: rgba(10, 12, 16, 0.9); }
+.lb img { display: block; max-width: 94vw; max-height: 86vh; margin: 0 auto; }
+.lb-tools { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 0.75rem; }
+.btn {
+  font: inherit; font-size: 0.9375rem; line-height: 1.2; padding: 0.5rem 0.9rem;
+  border: 1px solid var(--slate); border-radius: 2px; background: var(--surface); color: var(--slate); cursor: pointer;
+}
+.btn:hover { background: var(--tint); }
+
+@media (max-width: 48rem) { .photos { column-count: 2; } }
+@media (max-width: 40rem) {
+  .wrap { padding: 2rem 1.25rem 4rem; }
+  .video { grid-template-columns: 1fr; gap: 0.35rem; }
+  .v-go { margin-top: 0.4rem; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+/* ==========================================================
+   REDIGER HER
+   Videoer og billeder styres af de to lister herunder.
+   ========================================================== */
+
+var INTRO = 'Et udvalg af mine videoer og billeder.';
+var PHONE = '+45 42 60 76 77';
+var EMAIL = 'iamboehnke@gmail.com';
+
+// Rækkefølgen her er rækkefølgen på siden.
+var VIDEOS = [
+  { title: 'Albani', kind: 'GIF', role: '', note: 'GIF til Albani, Odense Bryggeri.',
+    url: 'https://fb.watch/v/SR8LHG-O/' },
+  { title: 'Champs Camp', kind: 'Portræt', role: '', note: 'Portræt af en bokseklub.',
+    url: 'https://www.youtube.com/watch?v=R4LOVlBPzI8' },
+  { title: 'Kortfilm', kind: 'Kortfilm', role: 'Fotograf', note: '',
+    url: 'https://www.youtube.com/watch?v=DhYoqWboZpY' }
+];
+
+// Læg billederne i mappen foto og skriv dem ind her. Eksempel:
+//   { src: 'foto/01.jpg', alt: 'Kort beskrivelse af billedet' },
+// Er listen tom, skjules fotosektionen.
+var PHOTOS = [
+];
+
+/* ========================================================== */
+
+(function () {
+  'use strict';
+  var root = document.getElementById('root');
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function hostLabel(u) {
+    var h = '';
+    try { h = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {}
+    if (/youtu/.test(h)) return 'YouTube';
+    if (/facebook|fb\.watch/.test(h)) return 'Facebook';
+    if (/vimeo/.test(h)) return 'Vimeo';
+    if (/instagram/.test(h)) return 'Instagram';
+    return h || 'linket';
+  }
+  var photos = PHOTOS.map(function (p, i) {
+    return typeof p === 'string' ? { src: p, alt: 'Foto ' + (i + 1) } : { src: p.src, alt: p.alt || ('Foto ' + (i + 1)) };
+  });
+
+  var vids = VIDEOS.map(function (v) {
+    var meta = [];
+    if (v.role) meta.push('Min rolle: ' + esc(v.role));
+    if (v.note) meta.push(esc(v.note));
+    return '<article class="video">' +
+      '<div class="kind">' + esc(v.kind) + '</div>' +
+      '<div><h3 class="v-title"><a href="' + esc(v.url) + '" target="_blank" rel="noopener noreferrer">' + esc(v.title) + '</a></h3>' +
+      (meta.length ? '<p class="v-meta">' + meta.join('. ') + '</p>' : '') + '</div>' +
+      '<span class="v-go">Se på ' + esc(hostLabel(v.url)) + '</span></article>';
+  }).join('');
+
+  var grid = photos.map(function (p, i) {
+    return '<figure class="ph"><button type="button" data-i="' + i + '" aria-label="Se billede ' + (i + 1) + ' i stort format">' +
+      '<img src="' + esc(p.src) + '" alt="' + esc(p.alt) + '" loading="lazy" decoding="async"></button></figure>';
+  }).join('');
+
+  root.innerHTML =
+    '<div class="wrap"><header>' +
+      '<h1 class="name"><span>Mikkel</span><span class="last">Bøhnke</span></h1>' +
+      '<hr class="name-rule">' +
+      (INTRO ? '<p class="intro">' + esc(INTRO) + '</p>' : '') +
+      '<p class="contact">' + esc(PHONE) + ' &nbsp;|&nbsp; <a href="mailto:' + esc(EMAIL) + '">' + esc(EMAIL) + '</a></p>' +
+    '</header>' +
+    (vids ? '<section aria-labelledby="h-video"><h2 id="h-video">Video</h2>' + vids + '</section>' : '') +
+    (grid ? '<section aria-labelledby="h-foto"><h2 id="h-foto">Foto</h2><div class="photos">' + grid + '</div></section>' : '') +
+    '</div>';
+
+  if (!photos.length) return;
+
+  var lb = document.createElement('dialog');
+  lb.className = 'lb';
+  lb.innerHTML = '<img alt=""><div class="lb-tools">' +
+    '<button type="button" class="btn" id="lb-prev">Forrige</button>' +
+    '<button type="button" class="btn" id="lb-close">Luk</button>' +
+    '<button type="button" class="btn" id="lb-next">Næste</button></div>';
+  document.body.appendChild(lb);
+  var idx = 0;
+  function show() { var im = lb.querySelector('img'); im.src = photos[idx].src; im.alt = photos[idx].alt; }
+  function step(d) { idx = (idx + d + photos.length) % photos.length; show(); }
+  root.addEventListener('click', function (e) {
+    var b = e.target.closest('.ph button');
+    if (!b) return;
+    idx = parseInt(b.getAttribute('data-i'), 10);
+    show();
+    lb.showModal();
+  });
+  document.getElementById('lb-prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('lb-next').addEventListener('click', function () { step(1); });
+  document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+</body>
+</html>
