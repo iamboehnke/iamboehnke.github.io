@@ -173,7 +173,7 @@ var PHOTOS = [{ src: 'foto/IMG_1438.jpg', alt: 'Gaden' },
 
   var grid = photos.map(function (p, i) {
     return '<figure class="ph"><button type="button" data-i="' + i + '" aria-label="Se billede ' + (i + 1) + ' i stort format">' +
-      '<img src="' + esc(p.src) + '" alt="' + esc(p.alt) + '" loading="lazy" decoding="async"></button></figure>';
+      '<img src="' + esc(p.src) + '" alt="' + esc(p.alt) + '" onerror="this.replaceWith(document.createTextNode(\'Kunne ikke hente \' + this.getAttribute(\'src\')))"></button></figure>';
   }).join('');
 
   root.innerHTML =
