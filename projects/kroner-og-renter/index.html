@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="DK Market Data Product - an automated Azure data pipeline that turns Danmarks Nationalbank exchange rates and policy rates into one data product for a website, an API and a SQL database." />
+  <script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = saved || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+  </script>
+  <title>DK Market Data Product - Mikkel Bøhnke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .arch-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 20px 0 24px;
+    }
+    .arch-table th {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--color-border, #d0d7de);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .arch-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--color-border, #d0d7de);
+      vertical-align: top;
+    }
+    .arch-table tr:last-child td { border-bottom: none; }
+    .kr-widget { margin: 24px 0; }
+    @media (max-width: 560px) {
+      .arch-table { font-size: 13px; }
+      .arch-table th, .arch-table td { padding: 7px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <header id="site-nav">
+    <nav><ul>
+      <li id="home"><a href="/">mikkelbohnke.com</a></li>
+      <li><span class="nav-divider"></span></li>
+      <li><a href="/projects/" class="active">Projects</a></li>
+      <li><a href="/about/">About</a></li>
+      <li class="nav-spacer"></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+    </ul></nav>
+  </header>
+  <main id="main-content">
+    <article class="project-article">
+      <div class="project-header">
+        <a href="/projects/" class="back-link">Back to projects</a>
+        <h1>DK Market Data Product</h1>
+        <div class="project-meta">
+          <span>Started October 2026</span>
+          <span>·</span>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Azure Functions</span>
+          <span class="tag">ADLS Gen2</span>
+          <span class="tag">Azure SQL</span>
+          <span class="tag">Medallion architecture</span>
+          <span class="tag">Data contracts</span>
+          <span class="tag">Django</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+        <a href="https://github.com/iamboehnke/dk-market-data-product" rel="noopener" class="github-link external">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="article-body">
+        <h2>What it does</h2>
+        <p>Every weekday morning, an Azure Function fetches Danmarks Nationalbank's exchange rates and policy rates from Statistics Denmark's open API, runs them through a medallion pipeline with quality checks, and publishes one data product that three consumers use: this page, a small Django API with a data catalogue, and an Azure SQL database.</p>
+        <p>I built it to learn Azure properly by doing the parts a data engineer is actually responsible for: loading data repeatedly without duplicates, stopping bad data before anyone uses it, and being able to say where every number came from. The widget below is the live end of the pipeline. It reads the published JSON straight from Azure.</p>
+
+        <div class="kr-widget"
+             data-src="https://stkrpubmb20871.blob.core.windows.net/public/kroner-og-renter/v1/latest.json"
+             data-catalog="https://app-kroner-og-renter-mb.azurewebsites.net/"
+             data-repo="https://github.com/iamboehnke/dk-market-data-product"></div>
+
+        <h2>Data sources</h2>
+        <p>Both sources come from <strong>Statistics Denmark's StatBank API</strong>, free and without an API key: table DNVALD for exchange rates against the Danish krone, and table DNRENTD for the Nationalbank's policy rates. The API returns CSV with decimal commas and uses <code>..</code> for missing values, so the pipeline parses and types them explicitly instead of trusting the format.</p>
+        <div class="callout">
+          <p><strong>Late data is normal.</strong> DESTR, the overnight rate, is published a day after the others. The pipeline fetches an overlap of ten banking days on every run, so late and revised values arrive on the next run without creating duplicates.</p>
+        </div>
+
+        <h2>Architecture</h2>
+        <p>One timer-triggered Azure Function runs the whole pipeline. No servers to maintain and nothing running between runs.</p>
+
+        <table class="arch-table">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Where</th>
+              <th>What happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bronze</td>
+              <td>ADLS Gen2</td>
+              <td>The raw CSV is stored unchanged for every run, so any result can be traced back to the exact response it came from</td>
+            </tr>
+            <tr>
+              <td>Silver</td>
+              <td>ADLS Gen2, Parquet</td>
+              <td>Typed rows, merged on date and code so the same run can be repeated safely</td>
+            </tr>
+            <tr>
+              <td>Gold</td>
+              <td>ADLS Gen2 and Azure SQL</td>
+              <td>Readable names, daily change and history, the version the consumers use</td>
+            </tr>
+            <tr>
+              <td>Consumers</td>
+              <td>JSON, Django, SQL</td>
+              <td>This page, the API and catalogue, and SQL tables with a run id on every row</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Data contracts and quality</h3>
+        <p>Each data product has a YAML contract describing its schema, key, owner and expectations. The pipeline runs 15 checks from the contracts on every run, for example that the euro stays inside the ERM II band against the krone. A failed check with severity <em>error</em> quarantines the batch instead of publishing it, and the consumers keep serving the last good version.</p>
+
+        <h3>Repeatable loads</h3>
+        <p>Every load is an upsert. Running the pipeline twice gives the same result: the second run reports zero inserts and everything unchanged. The run summary also counts revised and late-filled values separately, so a changed number is visible rather than silently overwritten.</p>
+
+        <h3>Lineage</h3>
+        <p>Every row in SQL carries the id of the run that wrote it, and the catalogue shows the path from bronze to gold for the latest run. Each run also writes a small JSON file with status, quality results and merge counts.</p>
+
+        <h2>Security and deployment</h2>
+        <p>The Function reaches the data lake and the database with a managed identity, so there are no connection strings or passwords in the code or settings. GitHub Actions deploys with OIDC federation to Azure instead of stored credentials, and a failing test blocks the deploy.</p>
+        <div class="callout">
+          <p>Running cost is close to zero: Azure Functions Flex Consumption, the Azure SQL free offer and App Service F1 cover the workload.</p>
+        </div>
+
+        <h2>Honest about the limits</h2>
+        <p>This is a learning project with a small data volume. The transformations run in pandas inside a Function because that is free and enough for a few thousand rows a year. On a real platform the same logic would live in Databricks as Delta tables and a scheduled job, and the merge step is written so it can move there directly. The Django app deliberately has no database of its own: it reads the published data product, so a visit to the catalogue never wakes the SQL database.</p>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/iamboehnke" rel="noopener me" title="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a></li>
+      <li><a href="https://www.linkedin.com/in/mikkelbohnke/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
+    </ul>
+  </footer>
+  <script src="/theme.js"></script>
+  <script src="/projects/kroner-og-renter/kroner-og-renter.js" defer></script>
+</body>
+</html>
