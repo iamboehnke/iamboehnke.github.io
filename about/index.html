@@ -23,15 +23,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
-  <style>
-    .about-body p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1.1rem; }
-    .about-body p:last-child { margin-bottom: 0; }
-    .about-body strong { color: var(--text); font-weight: 500; }
-    .about-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-    .about-body a:hover { opacity: 0.75; }
-    .about-body h2 { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 400; color: var(--text); margin: 2.25rem 0 0.6rem; }
-    .about-body h2:first-child { margin-top: 0; }
-  </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -48,11 +39,11 @@
   <main id="main-content">
     <h1 class="page-h1">About</h1>
 
-    <div class="about-body">
+    <div class="article-body">
       <p>
         I am a data scientist based in Odense. I hold a Cand.Scient. in Data Science from SDU,
         combined with a Bachelor's degree in Medievidenskab - media studies - which is a pairing
-        that sounds unusual but turns out to be genuinely useful: the technical work is only as
+        that sounds unusual but turns out to be useful: the technical work is only as
         good as your ability to explain what it means to someone who did not build it.
       </p>
 
@@ -61,7 +52,7 @@
         I worked as a Data Scientist student assistant at <strong>SDU RIO</strong> for two years,
         where most of my work was in cluster analysis, survey data, and reporting tools built in R and Power BI.
         After graduating I joined <strong>CyberPilot</strong> as an AI &amp; Data Engineer, where I worked
-        on an AWS Bedrock-based phishing campaign recommendation system - RAG pipelines, LLM evaluation
+        on an AWS Bedrock-based phishing campaign recommendation system - RAG pipelines (a language model that looks things up before answering), LLM evaluation
         across several models, and GDPR-compliant migration planning. The position was eliminated in a
         round of redundancies.
       </p>
@@ -75,13 +66,13 @@
         Day to day: Python, SQL, R. Machine learning with scikit-learn and PyTorch. Data work with
         pandas, PySpark, and PostgreSQL. I have built and deployed RAG pipelines with pgvector,
         worked with the AWS Bedrock and Scaleway APIs, and used Power BI for reporting in institutional
-        settings. On the infrastructure side I am comfortable with Railway, basic Docker, and Git-based
+        settings. On Azure I have built a pipeline from Functions to ADLS Gen2 and Azure SQL with a Django API on top, and I schedule smaller jobs with GitHub Actions. On the infrastructure side I am comfortable with Railway, basic Docker, and Git-based
         deployment workflows.
       </p>
 
       <h2>Outside work</h2>
       <p>
-        I run most mornings, which is partly why I built Daglig Vejr - checking three apps before
+        I run most mornings, which is partly why I built <a href="/projects/daglig-vejr/">Daglig Vejr</a> - checking three apps before
         deciding whether to take an antihistamine got old quickly. I collect vinyl records, bake
         sourdough with variable results, and spend more time than I should reading about IEMs.
       </p>

@@ -38,17 +38,17 @@
   </header>
   <main id="main-content">
     <h1>Mikkel Bøhnke</h1>
-    <blockquote><p>Data scientist. Baker, runner, film lover, record collector. Currently training for a marathon, which is a personal choice made without consulting the data.</p></blockquote>
+    <p class="tagline">Data scientist. Baker, runner, film lover, record collector. Currently training for a marathon, which is a personal choice made without consulting the data.</p>
     <p class="availability">Looking for my next role in data engineering or data science, in Odense or anywhere a train can get me to. <a href="mailto:mail@mikkelbohnke.com">mail@mikkelbohnke.com</a> or <a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener" class="external">LinkedIn</a></p>
 
     <div class="section-entry">
       <h2>Data &amp; Machine Learning</h2>
-      <p><a href="/projects/">Projects and experiments</a> in classical machine learning, NLP, and data pipelines - built to solve real problems, deployed where possible.</p>
+      <p><a href="/projects/">Projects</a> in classical machine learning and data pipelines, built to solve real problems and deployed where possible. Start with <a href="/projects/job-search/">my own job search</a>: <span id="n-apps">every application</span> I have sent, charted with ghosting rates and where each one dropped out.</p>
     </div>
 
     <div class="section-entry">
       <h2>Professional</h2>
-      <p><a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener" class="external">Experience and education</a> - Cand.Scient. in Data Science from SDU, with a background in media studies and the movie industry, which turns out to be surprisingly useful for communicating technical work to non-technical stakeholders.</p>
+      <p><a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener" class="external">Experience and education</a> - Cand.Scient. in Data Science from SDU, with a background in media studies and the movie industry.</p>
     </div>
   </main>
   <footer>
@@ -57,6 +57,13 @@
       <li><a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
     </ul>
   </footer>
+  <script>
+  // Count from the CSV so the home page cannot drift from the Job-search project.
+  fetch('/projects/job-search/applications.csv').then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+    var n = t.trim().split(/\r?\n/).length - 1;
+    if (n > 0) document.getElementById('n-apps').textContent = 'all ' + n + ' applications';
+  }).catch(function () {});
+  </script>
   <script src="/theme.js"></script>
 </body>
 </html>

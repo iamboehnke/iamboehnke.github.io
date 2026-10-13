@@ -34,34 +34,6 @@
       overflow: hidden;
       margin: 20px 0 24px;
     }
-    .stats-inline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin: 24px 0;
-    }
-    .stat-box {
-      text-align: center;
-      padding: 16px 8px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-    }
-    .stat-n {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 1.75rem;
-      font-weight: 500;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
     .legend-row {
       display: flex;
       flex-wrap: wrap;
@@ -82,9 +54,6 @@
       color: #b3403e;
       font-size: 0.9rem;
       font-family: 'DM Mono', monospace;
-    }
-    @media (max-width: 560px) {
-      .stats-inline { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -107,29 +76,14 @@
         <a href="/projects/" class="back-link">Back to projects</a>
         <h1>Job search</h1>
         <p class="project-lede">My own job search, charted from my records: how many applications were ignored, where the rest dropped out of the funnel, and which sectors, places and roles answered at all.</p>
-        <div class="project-meta">
-          <span>Started May 2026</span>
-        </div>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">pandas</span>
-          <span class="tag">Plotly.js</span>
-          <span class="tag">PapaParse</span>
-          <span class="tag">Gmail API</span>
-          <span class="tag">HTML/CSS</span>
-        </div>
+        <p class="project-meta">Started May 2026</p>
+        <div class="tags">Python, pandas, Plotly.js, PapaParse, Gmail API, HTML/CSS</div>
       </div>
 
       <div class="article-body">
 
         <h2>What it is</h2>
-        <p><span id="text-total">—</span> applications, <span id="text-months">—</span> months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
-        <div class="stats-inline">
-          <div class="stat-box"><span class="stat-n" id="stat-total">-</span><span class="stat-label">Applications</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-ghost">-</span><span class="stat-label">Ghosting rate</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-interview">-</span><span class="stat-label">Interviews</span></div>
-          <div class="stat-box"><span class="stat-n" id="stat-offer">-</span><span class="stat-label">Offers</span></div>
-        </div>
+        <p><span id="text-total">—</span> applications, <span id="text-months">—</span> months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes. Of the applications old enough to judge, <span id="stat-ghost">—</span> were ghosted.</p>
 
         <h2>The funnel</h2>
         <p id="funnel-desc">Of all applications, the vast majority either received no reply or an automated rejection. <span id="text-interviews">—</span> reached an interview stage. One became a job — for four months, until the position was eliminated.</p>
@@ -152,7 +106,7 @@
         <div class="chart-card"><div id="chart-monthly"></div></div>
 
         <h2>Public vs. private</h2>
-        <p>Public sector organisations responded at a noticeably higher rate than private ones. This likely reflects the legal obligation Danish public bodies have to acknowledge applications, rather than a difference in genuine interest.</p>
+        <p>Public sector organisations responded at a noticeably higher rate than private ones. This likely reflects the legal obligation Danish public bodies have to acknowledge applications, rather than a difference in interest.</p>
         <div class="chart-card"><div id="chart-sector"></div></div>
         <div class="callout"><p id="sector-insight"></p></div>
 
@@ -165,7 +119,7 @@
         <div class="chart-card"><div id="chart-role"></div></div>
 
         <h2>What the data says</h2>
-        <p><strong>Silence is the norm.</strong> Nearly half of concluded applications received no reply. This is not a reflection of fit - it is a structural feature of how hiring works here.</p>
+        <p><strong>Silence is the norm.</strong> Nearly half of concluded applications received no reply, which says more about how hiring works here than about fit.</p>
         <p>The funnel compresses fast. The drop-off between applying and being seen is steep, and almost entirely invisible to the applicant.</p>
         <p>English-language applications to Danish companies had a slightly higher response rate than Danish-language ones. The likely explanation: English roles tend to go to larger organisations with more professionally managed HR teams.</p>
         <p>The search is ongoing. This page updates automatically when the underlying data file is updated.</p>
@@ -309,9 +263,7 @@
     const concluded  = rows.filter(r => r.response_type !== 'too early');
     const ghosted    = rows.filter(r => r.response_type === 'ghosted');
     const interviews = rows.filter(r => ['first interview','second interview','offer'].includes(r.furthest_stage));
-    const offers     = rows.filter(r => r.furthest_stage === 'offer');
 
-    document.getElementById('stat-total').textContent       = rows.length;
     document.getElementById('text-total').textContent       = rows.length;
     document.getElementById('text-interviews').textContent  = interviews.length;
     // Span between the first and last logged application, so the copy cannot drift from the CSV.
@@ -321,8 +273,6 @@
       document.getElementById('text-months').textContent = Math.round(span / 2629800000);
     }
     document.getElementById('stat-ghost').textContent       = pct(ghosted.length, concluded.length) + '%';
-    document.getElementById('stat-interview').textContent   = interviews.length;
-    document.getElementById('stat-offer').textContent       = offers.length;
 
     buildSankey(rows);
     buildTimeline(rows);
