@@ -4,9 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Mikkel Bøhnke - Data Scientist based in Odense." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mikkel Bøhnke" />
+  <meta property="og:title" content="Mikkel Bøhnke" />
+  <meta property="og:description" content="Mikkel Bøhnke - Data Scientist based in Odense." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script>
   (function() {
-    var saved = localStorage.getItem('theme');
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {} // storage can be blocked
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var theme = saved || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
@@ -22,17 +28,18 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
   <header id="site-nav">
     <nav><ul>
-      <li id="home"><a href="/" class="active">mikkelbohnke.com</a></li>
+      <li id="home"><a href="/">mikkelbohnke.com</a></li>
       <li><span class="nav-divider"></span></li>
       <li><a href="/projects/">Projects</a></li>
       <li><a href="/about/">About</a></li>
       <li class="nav-spacer"></li>
-      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 0 0 12.5z" fill="currentColor"/></svg></button></li>
     </ul></nav>
   </header>
   <main id="main-content">
     <h1>Mikkel Bøhnke</h1>
     <blockquote><p>Data scientist. Baker, runner, film lover, record collector. Currently training for a marathon, which is a personal choice made without consulting the data.</p></blockquote>
+    <p class="availability">Looking for my next role in data engineering or data science, in Odense or anywhere a train can get me to. <a href="mailto:mail@mikkelbohnke.com">mail@mikkelbohnke.com</a> or <a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener" class="external">LinkedIn</a></p>
 
     <div class="section-entry">
       <h2>Data &amp; Machine Learning</h2>
@@ -41,12 +48,7 @@
 
     <div class="section-entry">
       <h2>Professional</h2>
-      <p><a href="https://www.linkedin.com/in/" rel="noopener" class="external">Experience and education</a> - Cand.Scient. in Data Science from SDU, with a background in media studies and the movie industry, which turns out to be surprisingly useful for communicating technical work to non-technical stakeholders.</p>
-    </div>
-
-    <div class="section-entry">
-      <h2>Contact</h2>
-      <p>Best reached at <a href="mailto:mail@mikkelbohnke.com">mail@mikkelbohnke.com</a> or via <a href="https://www.linkedin.com/in/mikkel-bohnke" rel="noopener" class="external">LinkedIn</a>.</p>
+      <p><a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener" class="external">Experience and education</a> - Cand.Scient. in Data Science from SDU, with a background in media studies and the movie industry, which turns out to be surprisingly useful for communicating technical work to non-technical stakeholders.</p>
     </div>
   </main>
   <footer>

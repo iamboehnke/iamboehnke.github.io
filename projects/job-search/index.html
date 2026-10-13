@@ -3,16 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A data visualization of Mikkel Bøhnke's graduate job search - 93 applications, ghosting rates, funnel drop-off, and response rates by sector." />
+  <meta name="description" content="A data visualization of Mikkel Bøhnke's graduate job search - ghosting rates, funnel drop-off, and response rates by sector." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mikkel Bøhnke" />
+  <meta property="og:title" content="Job search - Mikkel Bøhnke" />
+  <meta property="og:description" content="A data visualization of Mikkel Bøhnke's graduate job search - ghosting rates, funnel drop-off, and response rates by sector." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script>
   (function() {
-    var saved = localStorage.getItem('theme');
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {} // storage can be blocked
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var theme = saved || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
   })();
   </script>
-  <title>Job Search - Mikkel Bøhnke</title>
+  <title>Job search - Mikkel Bøhnke</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -23,8 +29,8 @@
     .chart-card {
       width: 100%;
       border-radius: 10px;
-      border: 1px solid var(--color-border, #d0d7de);
-      background: var(--color-canvas-subtle, #f6f8fa);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
       overflow: hidden;
       margin: 20px 0 24px;
     }
@@ -38,21 +44,21 @@
       text-align: center;
       padding: 16px 8px;
       border-radius: 8px;
-      border: 1px solid var(--color-border, #d0d7de);
-      background: var(--color-canvas-default, #fff);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
     }
     .stat-n {
       display: block;
       font-family: 'DM Mono', monospace;
       font-size: 1.75rem;
       font-weight: 500;
-      color: var(--color-accent-fg, #4a9b8f);
+      color: var(--accent);
       line-height: 1;
       margin-bottom: 4px;
     }
     .stat-label {
       font-size: 0.72rem;
-      color: var(--color-fg-muted, #57606a);
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
@@ -62,7 +68,7 @@
       gap: 12px;
       margin-bottom: 12px;
       font-size: 0.82rem;
-      color: var(--color-fg-muted, #57606a);
+      color: var(--text-muted);
     }
     .legend-dot {
       display: inline-block;
@@ -73,7 +79,7 @@
     }
     .error-msg {
       padding: 16px;
-      color: #d96b6b;
+      color: #b3403e;
       font-size: 0.9rem;
       font-family: 'DM Mono', monospace;
     }
@@ -91,7 +97,7 @@
       <li><a href="/projects/" class="active">Projects</a></li>
       <li><a href="/about/">About</a></li>
       <li class="nav-spacer"></li>
-      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 0 0 12.5z" fill="currentColor"/></svg></button></li>
     </ul></nav>
   </header>
 
@@ -100,9 +106,9 @@
       <div class="project-header">
         <a href="/projects/" class="back-link">Back to projects</a>
         <h1>Job search</h1>
+        <p class="project-lede">My own job search, charted from my records: how many applications were ignored, where the rest dropped out of the funnel, and which sectors, places and roles answered at all.</p>
         <div class="project-meta">
-          <span>Started May 2026</span>
-          <span></span>
+          <span>Started May 2026</span><span class="status-badge status-live">Live · as outcomes arrive</span>
         </div>
         <div class="tags">
           <span class="tag">Python</span>
@@ -117,7 +123,7 @@
       <div class="article-body">
 
         <h2>What it is</h2>
-        <p><span id="text-total">—</span> applications, 11 months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
+        <p><span id="text-total">—</span> applications, <span id="text-months">—</span> months and still going. A data visualization of my own job search - ghosting rates, funnel drop-off, and response rates by sector and location. I used my email archive and my own records to track how many organisations responded, how many sent a personal reply, and how far each application got. It is all rendered from a CSV file and updated whenever I add new outcomes.</p>
         <div class="stats-inline">
           <div class="stat-box"><span class="stat-n" id="stat-total">-</span><span class="stat-label">Applications</span></div>
           <div class="stat-box"><span class="stat-n" id="stat-ghost">-</span><span class="stat-label">Ghosting rate</span></div>
@@ -166,12 +172,13 @@
 
       </div>
     </article>
+    <p class="closing">Looking for my next role in data engineering or data science, in Odense or anywhere a train can get me to. <a href="mailto:mail@mikkelbohnke.com">mail@mikkelbohnke.com</a></p>
   </main>
 
   <footer>
     <ul>
       <li><a href="https://github.com/iamboehnke" rel="noopener me" title="GitHub"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a></li>
-      <li><a href="https://www.linkedin.com/in/mikkelbohnke/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
+      <li><a href="https://www.linkedin.com/in/mikkel-bohnke/" rel="noopener me" title="LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li>
     </ul>
   </footer>
 
@@ -198,16 +205,42 @@
   };
 
   // Use CSS custom properties so charts respect dark mode
-  function chartFont() {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-fg-default').trim() || C.dark;
+  // Series colours stay; only what sits on the card (nodes, outlines, grid, text) follows the theme.
+  // 'applied' and 'offer' would vanish on the dark card, so they get lighter dark-theme values.
+  function theme() {
+    const root = getComputedStyle(document.documentElement);
+    const light = document.documentElement.getAttribute('data-theme') === 'light';
+    return {
+      text: root.getPropertyValue('--text').trim(),
+      grid: root.getPropertyValue('--border').trim(),
+      card: root.getPropertyValue('--bg-card').trim(),
+      applied: light ? C.dark : '#9da5b4',
+      offer: light ? C.tealDark : '#a6e3d6',
+      offerLink: light ? 'rgba(26,92,82,0.55)' : 'rgba(166,227,214,0.55)',
+    };
   }
 
+  function chartFont() {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--text-dim').trim() || C.dark;
+  }
+
+  const isNarrow = () => window.innerWidth < 560;
+  // Stacked on phones so the outside label stays inside the plot instead of clipping at the card edge.
+  const rateText = d => `${d.rate}%${isNarrow() ? '<br>' : '  '}(${d.responded}/${d.concluded})`;
+
   function baseLayout(extra) {
-    return Object.assign({
+    const layout = Object.assign({
       font: { family: 'DM Sans, system-ui, sans-serif', color: chartFont() },
       paper_bgcolor: C.bg, plot_bgcolor: C.bg,
     }, extra);
+    if (isNarrow() && layout.yaxis) {
+      // Desktop px margins leave a ~50px plot on a phone; let Plotly size the label gutters instead.
+      layout.margin = Object.assign({}, layout.margin, { l: 10, r: 16 });
+      layout.yaxis = Object.assign({}, layout.yaxis, { automargin: true });
+      if (layout.xaxis) layout.xaxis = Object.assign({}, layout.xaxis, { automargin: true });
+    }
+    return layout;
   }
 
   function pct(n, d) { return d === 0 ? 0 : Math.round(n / d * 100); }
@@ -238,20 +271,41 @@
   }
 
   // ── Load ───────────────────────────────────────────────────────────────
-  Papa.parse(CSV_PATH, {
-    download: true, header: true, skipEmptyLines: true,
-    complete: ({ data }) => buildAll(data),
-    error: (err) => {
-      console.error('CSV load error:', err);
-      ['chart-sankey','chart-timeline','chart-monthly',
-       'chart-sector','chart-location','chart-role'].forEach(id => {
-        document.getElementById(id).innerHTML =
-          '<p class="error-msg">Could not load applications.csv - check the CSV_PATH variable and that the file is committed to the repo.</p>';
-      });
-    }
+  function showLoadError(detail) {
+    console.error('Job-search data failed to load:', detail);
+    ['chart-sankey','chart-timeline','chart-monthly',
+     'chart-sector','chart-location','chart-role'].forEach(id => {
+      document.getElementById(id).innerHTML =
+        '<p class="error-msg">The application data could not be loaded. Reload the page to try again.</p>';
+    });
+  }
+
+  // A blocked CDN leaves Papa/Plotly undefined; without this guard the page fails silently.
+  if (typeof Papa === 'undefined' || typeof Plotly === 'undefined') {
+    showLoadError('Papa or Plotly not available');
+  } else {
+    Papa.parse(CSV_PATH, {
+      download: true, header: true, skipEmptyLines: true,
+      complete: ({ data }) => {
+        if (!data.length) return showLoadError('applications.csv is empty');
+        buildAll(data);
+      },
+      error: showLoadError
+    });
+  }
+
+  // Re-render when a rotation or resize crosses the narrow threshold; margins are chosen at build time.
+  let allRows = null, wasNarrow = isNarrow();
+  window.addEventListener('resize', () => {
+    if (allRows && isNarrow() !== wasNarrow) buildAll(allRows);
   });
 
+  // Chart colours are read from the theme tokens at build time, so rebuild when the toggle flips.
+  new MutationObserver(() => { if (allRows) buildAll(allRows); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
   function buildAll(rows) {
+    allRows = rows; wasNarrow = isNarrow();
     const concluded  = rows.filter(r => r.response_type !== 'too early');
     const ghosted    = rows.filter(r => r.response_type === 'ghosted');
     const interviews = rows.filter(r => ['first interview','second interview','offer'].includes(r.furthest_stage));
@@ -260,6 +314,12 @@
     document.getElementById('stat-total').textContent       = rows.length;
     document.getElementById('text-total').textContent       = rows.length;
     document.getElementById('text-interviews').textContent  = interviews.length;
+    // Span between the first and last logged application, so the copy cannot drift from the CSV.
+    const dated = rows.map(r => r.date_applied).filter(Boolean).sort();
+    if (dated.length > 1) {
+      const span = new Date(dated[dated.length - 1]) - new Date(dated[0]);
+      document.getElementById('text-months').textContent = Math.round(span / 2629800000);
+    }
     document.getElementById('stat-ghost').textContent       = pct(ghosted.length, concluded.length) + '%';
     document.getElementById('stat-interview').textContent   = interviews.length;
     document.getElementById('stat-offer').textContent       = offers.length;
@@ -298,10 +358,10 @@
       type: 'sankey',
       node: {
         pad: 18, thickness: 22,
-        line: { color: 'white', width: 0.8 },
+        line: { color: theme().card, width: 0.8 },
         label: labels,
-        color: [C.dark, C.slate, C.slateLt, C.red, C.amber,
-                C.teal, C.tealLt, C.tealMid, C.tealDark],
+        color: [theme().applied, C.slate, C.slateLt, C.red, C.amber,
+                C.teal, C.tealLt, C.tealMid, theme().offer],
       },
       link: {
         source: [0,0,0,0,0,5,5,5],
@@ -311,7 +371,7 @@
           'rgba(148,163,184,0.35)','rgba(203,213,225,0.35)',
           'rgba(217,107,107,0.35)','rgba(201,127,74,0.35)',
           'rgba(74,155,143,0.45)','rgba(122,188,181,0.45)',
-          'rgba(58,122,111,0.45)','rgba(26,92,82,0.55)',
+          'rgba(58,122,111,0.45)', theme().offerLink,
         ],
       },
     }], baseLayout({ height: 420, margin: { l:10,r:10,t:10,b:10 } }), CFG);
@@ -337,9 +397,9 @@
         x: g.map(r => r.date_applied), y: g.map(() => outcome),
         text: g.map(r => r.company),
         marker: {
-          color: OUTCOME_COLOR[outcome] || C.teal, size: 11, opacity: 0.85,
+          color: outcome === 'offer' ? theme().offer : (OUTCOME_COLOR[outcome] || C.teal), size: 11, opacity: 0.85,
           symbol: outcome === 'offer' ? 'star' : 'circle',
-          line: { width: 1, color: 'white' },
+          line: { width: 1, color: theme().card },
         },
         hovertemplate: '<b>%{text}</b><br>%{x}<extra></extra>',
       };
@@ -348,8 +408,9 @@
     Plotly.newPlot('chart-timeline', traces, baseLayout({
       height: 310,
       margin: { l:175,r:20,t:20,b:30 },
-      xaxis: { showgrid: true, gridcolor: '#e5e7eb', tickformat: '%b %Y' },
-      yaxis: { showgrid: true, gridcolor: '#f0f0f0',
+      xaxis: { showgrid: true, gridcolor: theme().grid,
+               tickformat: isNarrow() ? '%b %y' : '%b %Y', nticks: isNarrow() ? 4 : undefined },
+      yaxis: { showgrid: true, gridcolor: theme().grid,
                categoryorder: 'array', categoryarray: ORDER },
     }), CFG);
   }
@@ -376,7 +437,7 @@
       height: 260,
       margin: { l:40,r:20,t:20,b:60 },
       xaxis: { showgrid: false, tickangle: -40 },
-      yaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Applications', dtick: 5 },
+      yaxis: { showgrid: true, gridcolor: theme().grid, title: 'Applications', dtick: 5 },
     }), CFG);
   }
 
@@ -384,7 +445,8 @@
   function buildSector(rows) {
     const bySector = groupBy(rows, 'sector');
     const sectors  = ['private','public'].filter(s => bySector[s]);
-    const labels   = sectors.map(s => `${s[0].toUpperCase()+s.slice(1)} (${bySector[s].length} applications)`);
+    const narrow   = isNarrow();
+    const labels   = sectors.map(s => `${s[0].toUpperCase()+s.slice(1)}${narrow ? '<br>' : ' '}(${bySector[s].length} applications)`);
     const rates    = sectors.map(s => responseRate(bySector[s]));
 
     Plotly.newPlot('chart-sector', [
@@ -392,24 +454,26 @@
         type: 'bar', orientation: 'h', name: 'Ghosted',
         y: labels, x: rates.map(r => r.ghosted),
         marker: { color: C.slate, opacity: 0.55 },
-        text: rates.map(r => `${r.ghosted} ghosted`),
+        text: rates.map(r => narrow ? `${r.ghosted}` : `${r.ghosted} ghosted`),
         textposition: 'inside', insidetextanchor: 'middle',
-        textfont: { size: 12 },
+        textfont: { color: theme().text, size: 12 },
         hovertemplate: '%{y}<br>Ghosted: %{x}<extra></extra>',
       },
       {
         type: 'bar', orientation: 'h', name: 'Responded',
         y: labels, x: rates.map(r => r.responded),
         marker: { color: C.teal, opacity: 0.90 },
-        text: rates.map((r,i) => `${r.responded} responded (${pct(r.responded,r.concluded)}%)`),
+        text: rates.map(r => narrow
+          ? `${r.responded} (${pct(r.responded,r.concluded)}%)`
+          : `${r.responded} responded (${pct(r.responded,r.concluded)}%)`),
         textposition: 'inside', insidetextanchor: 'middle',
-        textfont: { color: 'white', size: 12 },
+        textfont: { color: '#0f1b19', size: 12 },
         hovertemplate: '%{y}<br>Responded: %{x}<extra></extra>',
       },
     ], baseLayout({
-      barmode: 'stack', height: 200,
+      barmode: 'stack', height: narrow ? 240 : 200,
       margin: { l:250, r:30, t:20, b:70 },
-      xaxis: { showgrid: true, gridcolor: '#e5e7eb', dtick: 10 },
+      xaxis: { showgrid: true, gridcolor: theme().grid, dtick: 10 },
       yaxis: { showgrid: false },
       legend: { orientation: 'h', y: -0.35, font: { size: 12 }, traceorder: 'reversed' },
       annotations: [{
@@ -441,13 +505,13 @@
       type: 'bar', orientation: 'h',
       x: data.map(d => d.rate), y: data.map(d => d.loc),
       marker: { color: data.map(d => d.rate >= 50 ? C.teal : C.slate), opacity: 0.85 },
-      text: data.map(d => `${d.rate}%  (${d.responded}/${d.concluded})`),
-      textposition: 'outside',
+      text: data.map(rateText),
+      textposition: 'outside', textfont: { color: theme().text },
       hovertemplate: '%{y}: %{x}% response rate<extra></extra>',
     }], baseLayout({
       height: Math.max(220, data.length * 36 + 60),
       margin: { l:110,r:140,t:20,b:50 },
-      xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Response rate (%)', range: [0,130] },
+      xaxis: { showgrid: true, gridcolor: theme().grid, title: 'Response rate (%)', range: [0,130] },
       yaxis: { showgrid: false },
     }), CFG);
   }
@@ -464,13 +528,13 @@
       type: 'bar', orientation: 'h',
       x: data.map(d => d.rate), y: data.map(d => d.role),
       marker: { color: data.map(d => d.rate >= 50 ? C.teal : C.slate), opacity: 0.85 },
-      text: data.map(d => `${d.rate}%  (${d.responded}/${d.concluded})`),
-      textposition: 'outside',
+      text: data.map(rateText),
+      textposition: 'outside', textfont: { color: theme().text },
       hovertemplate: '%{y}: %{x}% response rate<extra></extra>',
     }], baseLayout({
       height: Math.max(200, data.length * 36 + 60),
       margin: { l:140,r:140,t:20,b:50 },
-      xaxis: { showgrid: true, gridcolor: '#e5e7eb', title: 'Response rate (%)', range: [0,130] },
+      xaxis: { showgrid: true, gridcolor: theme().grid, title: 'Response rate (%)', range: [0,130] },
       yaxis: { showgrid: false },
     }), CFG);
   }

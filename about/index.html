@@ -4,9 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="About Mikkel Bøhnke." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mikkel Bøhnke" />
+  <meta property="og:title" content="About - Mikkel Bøhnke" />
+  <meta property="og:description" content="About Mikkel Bøhnke." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script>
   (function() {
-    var saved = localStorage.getItem('theme');
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {} // storage can be blocked
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var theme = saved || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
@@ -36,7 +42,7 @@
       <li><a href="/projects/">Projects</a></li>
       <li><a href="/about/" class="active">About</a></li>
       <li class="nav-spacer"></li>
-      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button></li>
+      <li><button id="theme-btn" title="Toggle theme" aria-label="Toggle light/dark theme"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 0 0 12.5z" fill="currentColor"/></svg></button></li>
     </ul></nav>
   </header>
   <main id="main-content">
@@ -80,6 +86,7 @@
         sourdough with variable results, and spend more time than I should reading about IEMs.
       </p>
     </div>
+    <p class="closing">Looking for my next role in data engineering or data science, in Odense or anywhere a train can get me to. <a href="mailto:mail@mikkelbohnke.com">mail@mikkelbohnke.com</a></p>
   </main>
   <footer>
     <ul>

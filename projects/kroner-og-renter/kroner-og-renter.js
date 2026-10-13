@@ -15,10 +15,12 @@
   "use strict";
 
   var CSS = [
-    ".kr-widget{--kr-bg:#fff;--kr-text:#1d1f22;--kr-muted:#5f6368;--kr-line:#e3e1da;--kr-accent:#1f5c4a;",
+    ".kr-widget{--kr-bg:var(--bg-card,#fff);--kr-text:var(--text,#1d1f22);--kr-muted:var(--text-muted,#5f6368);--kr-line:var(--border,#e3e1da);--kr-accent:var(--accent,#1f5c4a);",
     "--kr-up:#b3261e;--kr-down:#1e7a4c;--kr-warn:#9a6200;font:15px/1.5 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;",
     "color:var(--kr-text);background:var(--kr-bg);border:1px solid var(--kr-line);border-radius:12px;padding:20px;max-width:640px}",
-    "@media (prefers-color-scheme:dark){.kr-widget{--kr-bg:#1c1e21;--kr-text:#e8e6e1;--kr-muted:#a3a29d;--kr-line:#2e3034;",
+    // On the site the tokens and data-theme decide; with neither (standalone use) follow the system.
+    ":root[data-theme=dark] .kr-widget{--kr-up:#f08a80;--kr-down:#6cc28f;--kr-warn:#e0b04f}",
+    "@media (prefers-color-scheme:dark){:root:not([data-theme]) .kr-widget{--kr-bg:#1c1e21;--kr-text:#e8e6e1;--kr-muted:#a3a29d;--kr-line:#2e3034;",
     "--kr-accent:#7cc4a8;--kr-up:#f08a80;--kr-down:#6cc28f;--kr-warn:#e0b04f}}",
     ".kr-widget *{box-sizing:border-box}",
     ".kr-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}",
@@ -128,13 +130,13 @@
 
   function load(el) {
     var src = el.getAttribute("data-src");
-    if (!src) { el.innerHTML = '<p class="kr-msg">Mangler data-src.</p>'; return; }
-    el.innerHTML = '<p class="kr-msg">Henter dagens tal ...</p>';
+    if (!src) { el.innerHTML = '<p class="kr-msg">This widget has no data source.</p>'; return; }
+    el.innerHTML = '<p class="kr-msg">Loading today\'s figures ...</p>';
     fetch(src, { cache: "no-cache" })
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (data) { render(el, data); })
       .catch(function () {
-        el.innerHTML = '<p class="kr-msg">Tallene kunne ikke hentes lige nu. Pipelinen kører hver hverdag morgen.</p>';
+        el.innerHTML = '<p class="kr-msg">The figures could not be loaded right now. The pipeline updates every weekday morning, so please try again later.</p>';
       });
   }
 
